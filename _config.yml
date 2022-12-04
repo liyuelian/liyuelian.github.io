@@ -1,17 +1,17 @@
 # Site settings
-title: Website Title
-description: Website short description
+title: Welcome To My Website!
+description: 指向月球
 baseurl: "" 
 #change the baseurl to "" if you are using it as your user GitHub Pages
-url: "https://yk-liu.github.io"  
+url: "https://liyuelian.github.io"  
 
 
 # GitHub User settings
-username: Username
+username: liyuelian
 github_username: github_username
 user_description: user_description
 user_title: user_title
-email: 
+email: liyuelian.ke@outlook.com
 
 # Blog Author settings
 author:
