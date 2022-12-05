@@ -24,7 +24,7 @@
 ### 安装主题依赖
 
 Archer 主题依赖于 `hexo-generator-json-content` 和 `hexo-wordcount`，因此需要在 Hexo 根目录执行以下命令：
-
+  
 ``` bash
 npm install hexo-generator-json-content --save
 npm install hexo-wordcount --save
@@ -217,9 +217,9 @@ mermaid:
       A-->C;
       B-->D;
       C-->D;
+    ```
 ```
 
-```
 > ❗️❗️❗️ 注意：如果您需要使用**类图**，请编辑您 Hexo 根目录下的 `_config.yml` 文件，设置 `external_link: false`。请确保这个设置对您原来的页面功能没有影响，这是 Hexo 本身的 bug。
 
 ### 启用 LaTeX 数学公式
@@ -234,7 +234,7 @@ Archer 主题已经内置了 MathJax，但是您需要**替换 Hexo 默认的 Ma
 
 在 Hexo 根目录下执行下面的命令：
 
-​``` bash
+``` bash
 # 卸载默认的渲染引擎
 npm uninstall hexo-renderer-marked --save
 # 安装 hexo-renderer-pandoc
