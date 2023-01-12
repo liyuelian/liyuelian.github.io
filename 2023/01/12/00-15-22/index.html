@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="liyuelian'blogs" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="主题 2 Shell工具和脚本Shell 工具和脚本 · the missing semester of your cs education (missing-semester-cn.github.io) Shell脚本shell 脚本是一种更加复杂度的工具。  定义变量  在bash中为变量赋值的语法是foo&#x3D;bar，意为定义变量foo，foo的值为bar。访问变量使用$变量名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="主题 2 Shell工具和脚本">
+<meta property="og:url" content="https://liyuelian.github.io/2023/01/12/00-15-22/index.html">
+<meta property="og:site_name" content="liyuelian&#39;blogs">
+<meta property="og:description" content="主题 2 Shell工具和脚本Shell 工具和脚本 · the missing semester of your cs education (missing-semester-cn.github.io) Shell脚本shell 脚本是一种更加复杂度的工具。  定义变量  在bash中为变量赋值的语法是foo&#x3D;bar，意为定义变量foo，foo的值为bar。访问变量使用$变量名">
+<meta property="og:locale">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20221230014444510.png">
+<meta property="article:published_time" content="2023-01-11T16:15:22.000Z">
+<meta property="article:modified_time" content="2023-01-12T16:21:37.719Z">
+<meta property="article:author" content="liyuelian">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20221230014444510.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liyuelian.github.io/2023/01/12/00-15-22/"/>
+
+
+
+
+
+  <title>主题 2 Shell工具和脚本 | liyuelian'blogs</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liyuelian'blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">忽如远行客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liyuelian.github.io/2023/01/12/00-15-22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat_header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liyuelian'blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">主题 2 Shell工具和脚本</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-01-12T00:15:22+08:00">
+                2023-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/the-missing-semester-of-cs/" itemprop="url" rel="index">
+                    <span itemprop="name">the missing semester of cs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+		  
+			<span class="post-meta-divider">|</span>
+			<span id="busuanzi_value_page_pv"></span>次阅读
+		  
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="主题-2-Shell工具和脚本"><a href="#主题-2-Shell工具和脚本" class="headerlink" title="主题 2 Shell工具和脚本"></a>主题 2 Shell工具和脚本</h1><p><a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/shell-tools/">Shell 工具和脚本 · the missing semester of your cs education (missing-semester-cn.github.io)</a></p>
+<h2 id="Shell脚本"><a href="#Shell脚本" class="headerlink" title="Shell脚本"></a>Shell脚本</h2><p>shell 脚本是一种更加复杂度的工具。</p>
+<ul>
+<li>定义变量</li>
+</ul>
+<p>在bash中为变量赋值的语法是<code>foo=bar</code>，意为定义变量foo，foo的值为bar。访问变量使用$变量名</p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ foo=bar</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$foo</span>&quot;</span></span><br><span class="line">bar</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，Shell中使用空格作为分隔参数的保留字符。</p>
+<p>如果将上诉赋值语句写为<code>foo = bar</code>，将不起作用。事实上，这样写并没有将bar赋给foo，而是用<code>=</code>和<code>bar</code>作为参数调用<code>foo</code>程序。因为这样Shell会认为你正在执行一个名为<code>foo</code>的命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ foo = bar</span><br><span class="line">-bash: foo: <span class="built_in">command</span> not found</span><br></pre></td></tr></table></figure>
+
+<p>你需要特别注意这类问题，比如如果有带空格的文件名，你需要使用引号将其括起来。</p>
+<ul>
+<li>在bash中处理字符串</li>
+</ul>
+<p>有两种定义字符串的方法，可以使用双引号定义字符串，也可以使用单引号定义字符串。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> <span class="string">&quot;Hello&quot;</span></span><br><span class="line">Hello</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> <span class="string">&#x27;Hello&#x27;</span></span><br><span class="line">Hello</span><br></pre></td></tr></table></figure>
+
+<p>Bash中的字符串通过<code>&#39;</code> 和 <code>&quot;</code>分隔符来定义，但是它们的含义并不相同。</p>
+<p>以<code>&#39;</code>定义的字符串为原义字符串，其中的变量不会被转义，而 <code>&quot;</code>定义的字符串会将变量值进行替换。</p>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> <span class="string">&quot;Value is <span class="variable">$foo</span>&quot;</span></span><br><span class="line">Value is bar</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> <span class="string">&#x27;Value is $foo&#x27;</span></span><br><span class="line">Value is <span class="variable">$foo</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义函数</li>
+</ul>
+<p>和其他大多数的编程语言一样，<code>bash</code>也支持<code>if</code>, <code>case</code>, <code>while</code> 和 <code>for</code> 这些控制流关键字。同样地， <code>bash</code> 也支持函数，它可以接受参数并基于参数进行操作。</p>
+<p>下面这个函数是一个例子，它会创建一个文件夹并使用<code>cd</code>进入该文件夹。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">cat</span> mcd.sh</span><br><span class="line"><span class="function"><span class="title">mcd</span></span>()&#123;</span><br><span class="line">	<span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line">	<span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里 <code>$1</code> 是脚本的第一个参数的意思</p>
+</blockquote>
+<p><code>source 脚本名</code>，这将会在Shell中加载脚本并运行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">source</span> mcd.sh</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ mcd <span class="built_in">test</span></span><br><span class="line">[lighthouse@VM-8-17-centos <span class="built_in">test</span>]$ </span><br></pre></td></tr></table></figure>
+
+<p>如上，在执行了<code>source mcd.sh</code>之后，看似无事发生，但实际上Shel中已经定义了mcd函数。我们给mcd传递一个参数test，这个参数被用于作为创建的目录名（即$1），然后Shell自动切换到了test目录里。整个过程就是，我们创建了文件夹并进入其中。</p>
+<ul>
+<li>保留字</li>
+</ul>
+<p>在bash中，许多$开头的东西一般都是被保留的（指留作特定用途）</p>
+<p> <code>$1</code> 是脚本的第一个参数的意思。与其他脚本语言不同的是，bash使用了很多特殊的变量来表示参数、错误代码和相关变量。下面列举其中一些变量，更完整的列表可以参考 <a target="_blank" rel="noopener" href="https://www.tldp.org/LDP/abs/html/special-chars.html">这里</a>。</p>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0</td>
+<td>脚本名</td>
+</tr>
+<tr>
+<td>$1~$9</td>
+<td>脚本的参数， $1 是第一个参数，依此类推</td>
+</tr>
+<tr>
+<td>$@</td>
+<td>所有参数</td>
+</tr>
+<tr>
+<td>$#</td>
+<td>参数个数</td>
+</tr>
+<tr>
+<td>$?</td>
+<td>前一个命令的返回值</td>
+</tr>
+<tr>
+<td>$$</td>
+<td>当前脚本的进程识别码</td>
+</tr>
+<tr>
+<td>!!</td>
+<td>完整的上一条命令，包括参数。常见应用：当你因为权限不足执行命令失败时，可以使用 <code>sudo !!</code>再尝试一次。</td>
+</tr>
+<tr>
+<td>$_</td>
+<td>上一条命令的最后一个参数，如果你正在使用的是交互式 shell，你可以通过按下 <code>Esc</code> 之后键入 <code>.</code> 来获取这个值。</td>
+</tr>
+</tbody></table>
+<p>有一些保留字可以直接在Shell中使用，例如<code>$?</code>可以获取上一条命令的错误代码(返回值)，再比如<code>$_</code>会返回上一条命令的最后一个参数。</p>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">mkdir</span> <span class="built_in">test</span></span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">cd</span> <span class="variable">$_</span></span><br><span class="line">[lighthouse@VM-8-17-centos <span class="built_in">test</span>]$ </span><br></pre></td></tr></table></figure>
+
+<p>如上，我们无需在写一次<code>test</code>，使用<code>$_</code>访问该参数，它就会被替换成test，现在我们进入到test目录中了。</p>
+<p>这样的例子有很多，再例如<code>!!</code>，它返回完整的上一条命令，包括参数。常见应用：当你因为权限不足执行命令失败时，可以使用 <code>sudo !!</code>再尝试一次。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">mkdir</span> /mnt/new</span><br><span class="line"><span class="built_in">mkdir</span>: cannot create directory ‘/mnt/new’: Permission denied</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ sudo !!</span><br><span class="line">sudo <span class="built_in">mkdir</span> /mnt/new</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">rmdir</span> /mnt/new</span><br><span class="line"><span class="built_in">rmdir</span>: failed to remove <span class="string">&#x27;/mnt/new&#x27;</span>: Permission denied</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ sudo !!</span><br><span class="line">sudo <span class="built_in">rmdir</span> /mnt/new</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>标准错误流</li>
+</ul>
+<p>如果你的程序出错了，你想输出错误但不想污染标准输出，那么你可以写进这个流。</p>
+<ul>
+<li>错误代码</li>
+</ul>
+<p>还有一种叫做错误代码<code>$?</code>（error code）的东西，是一种告诉你整个运行过程结果如何的方式。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> <span class="string">&quot;Hello&quot;</span></span><br><span class="line">Hello</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> $?</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>这里显示<code>echo &quot;Hello&quot; </code>运行的错误代码为0，0是因为一切正常，没有出现问题。</p>
+<p>这种退出码和如C语言里代表的意思一样。</p>
+<p>0代表一切正常，没有出现错误。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ grep foobar mcd.sh</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> $?</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>如上，我们尝试着在mcd.sh脚本中查找<code>foobar</code>字符串，而它不存在，所以grep什么都没输出。但是通过反馈一个1的错误代码，它让我们知道这件事没有成功。</p>
+<p>此外，true的错误代码始终是0；false的错误代码则是1。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="literal">true</span></span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> $?</span><br><span class="line">0</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="literal">false</span></span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> $?</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>逻辑运算符</li>
+</ul>
+<p>下面bash要做的是执行第一个命令，如果第一个命令失败，再去执行第二个（短路运算法则）。因为它尝试做一个逻辑或，如果第一个命令没有0错误码，就会去执行第二个命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="literal">false</span> || <span class="built_in">echo</span> <span class="string">&quot;Oops fail&quot;</span></span><br><span class="line">Oops fail</span><br></pre></td></tr></table></figure>
+
+<p>相似地，如果我们把false换成true，那么将不会执行第二个命令，因为第一个命令已经返回一个0错误码了，第二个命令将会被短路。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="literal">true</span> || <span class="built_in">echo</span> <span class="string">&quot;Oops fail&quot;</span></span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ </span><br></pre></td></tr></table></figure>
+
+<p>相似的，我们使用与运算符<code>&amp;&amp;</code>，它仅当第一个命令执行无错误时，才会执行第二个部分。如果第一个命令失败，那么第二个命令就不会被执行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="literal">true</span> &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;Things went well&quot;</span></span><br><span class="line">Things went well</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="literal">false</span> &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;This will not print&quot;</span></span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ </span><br></pre></td></tr></table></figure>
+
+<p>使用<code>;</code>号连接的代码，无论你执行什么，都可以通过。在同一行使用分号来连接命令，如下，它始终会被打印出来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="literal">false</span> ; <span class="built_in">echo</span> <span class="string">&quot;This will always print&quot;</span></span><br><span class="line">This will always <span class="built_in">print</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>把命令的输出存到变量里</li>
+</ul>
+<p>这里我们获取pwd命令的输出，它会打印出我们当前的工作路径，然后把其存入foo变量中。然后我们询问变量foo的值，我们就可以看到这个字符串</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ foo=$(<span class="built_in">pwd</span>)</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> <span class="variable">$foo</span></span><br><span class="line">/home/lighthouse/missing-semester/tools</span><br></pre></td></tr></table></figure>
+
+<p>更广泛地来说，我们可以通过一个叫做命令替换的东西，把它放进任意字符串中。并且因为我们使用的不是单引号，所以这串东西会被展开。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> <span class="string">&quot;We are in <span class="subst">$(pwd)</span>&quot;</span></span><br><span class="line">We are <span class="keyword">in</span> /home/lighthouse/missing-semester/tools</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>过程替换</li>
+</ul>
+<p>另一个比较好用知名度更低的东西叫做过程替换。和之前的命令替换是类似的，例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">cat</span> &lt;(<span class="built_in">ls</span>) &lt;(<span class="built_in">ls</span> ..)</span><br><span class="line">mcd.sh</span><br><span class="line"><span class="built_in">test</span></span><br><span class="line">tools</span><br></pre></td></tr></table></figure>
+
+<p>如上，<code>&lt;(ls) &lt;(ls ..)</code>的作用是，<code>()</code>内部的命令会被执行，其输出将被存储到一个临时文件内，然后把文件的标识符handle交给最左边的命令。</p>
+<p>因此，这里我们在ls这个目录，把输出放到临时文件内，再对父目录如法炮制，然后把两个文件连接。</p>
+<p>这种写法非常方便，因为有些命令会从某个文件的内容，而不是从标准输入里，获得输入参数</p>
+<p>综合案例：</p>
+<p>现在来看一个里面包含这些内容的简单示例脚本：</p>
+<p>example.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">  </span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Start program at <span class="subst">$(date)</span>&quot;</span> <span class="comment"># Date will be substituted</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Running program <span class="variable">$0</span> with <span class="variable">$#</span> arguments with pid $$&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span>;<span class="keyword">do</span></span><br><span class="line">        grep foobar <span class="string">&quot;<span class="variable">$file</span>&quot;</span> &gt; /dev/null 2&gt; /dev/null</span><br><span class="line">        <span class="comment"># When pattern is not found,grep has exit status</span></span><br><span class="line">        <span class="comment"># We redirect STDOUT and STDERR to a null register ..</span></span><br><span class="line">        <span class="keyword">if</span> [[ <span class="string">&quot;$?&quot;</span> -ne 0 ]]; <span class="keyword">then</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&quot;File <span class="variable">$file</span> does not have any foobar, adding one&quot;</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&quot;# foobar&quot;</span> &gt;&gt; <span class="string">&quot;<span class="variable">$file</span>&quot;</span></span><br><span class="line">        <span class="keyword">fi</span>      </span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>第三行：有一个<code>$(date)</code>的参数，date打印出当前的时间。</p>
+<p>第五行：<code>$0</code>代表着当前运行的脚本的名称，<code>$#</code>代表给定的参数个数，<code>$$</code>是这个命令的进程ID，一般缩写为PID。</p>
+<p>第七行：<code>$@</code>可以展开成所有参数，比如有三个参数，你可以键入<code>$1 $2 $3</code>，如果你不知道有多少个参数，也可以直接键入<code>$@</code>。这里我们通过这种方式将所有参数放在这里，然后这些参数被传给for循环，for循环会创建一个<code>file</code>变量，依次地用这些参数赋值给<code>file</code>变量。</p>
+<p>第八行：我们运行grep命令，它会在一堆文件里搜索一个子串。这里我们在文件里搜索字符串foobar，文件变量<code>file</code>将会展开为赋给它的值。</p>
+<p>之前说过，如果我们在意程序的输出的话，我们可以把它重定向到某处（比如到一个文件里面保存下来，或者连接组合）。但有时候情况恰恰相反，例如有时候我们只想知道某个脚本的错误代码是什么，例如这里想知道grep能不能成功查找。我们并不在意程序的运行结果，因此我们甚至能直接扔掉整个输出，包括标准输出和标准错误流。这里我们做的就是把两个输出重定向到<code>/dev/null</code>，&#x2F;dev&#x2F;null是UNIX系统的一种特殊设备，输入到它的内容会被丢弃（就是说你可以随意乱写乱画，然后所有的内容都会被丢掉）。</p>
+<p>这里的<code>&gt;</code>代表重定向输出流，<code>2&gt;</code>代表重定向标准错误流（因为这两个流是分立的，所以你要告诉bash去操作哪一个）。</p>
+<p>所以这里我们执行命令，去检查文件有没有foobar字符串，如果有的话，返回一个0错误代码，如果没有返回一个非0错误代码。</p>
+<p>第十一行：我们获取前一个命令的错误代码（<code>$?</code>），然后是一个比较运算符<code>-ne</code>（代表不等于Non Equal）</p>
+<blockquote>
+<p>其他编程序语言中有像&#x3D;和≠，bash里有很多预设的比较运算(可以使用命令<code>man test</code>查看)，这主要是为了你用Shell的时候，有很多东西要去测试。比如我们现在正在对比两个数，看它们是否相同。</p>
+</blockquote>
+<p>如果文件中没有foobar，前一个命令将会返回一个非零错误代码。</p>
+<p>第十二行：我们将会如果前一个命令返回一个非0错误代码，我们将会输出一句话<code>File xxx does not have any foobar, adding one</code></p>
+<p>第十三行：使用<code>&gt;&gt;</code>往对应文件中追加一行注释<code># foobar</code></p>
+<p>现在我们来运行这个脚本，当前目录下有一些文件，我们将这些文件作为参数传给example.sh，检查是否有foobar。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">ls</span></span><br><span class="line">example.sh  hello.txt  mcd.sh</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ ./example.sh hello.txt mcd.sh</span><br><span class="line">Start program at Sun Dec 25 23:06:13 CST 2022</span><br><span class="line">Running program ./example.sh with 2 arguments with pid 2570038</span><br><span class="line">File hello.txt does not have any foobar, adding one</span><br><span class="line">File mcd.sh does not have any foobar, adding one</span><br></pre></td></tr></table></figure>
+
+<p>我们在文件hello.txt和mcd.sh中没有找到foobar字符串，因此脚本分别给这两个文件添加了一个<code># foobar</code> 注释</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">cat</span> hello.txt</span><br><span class="line">hello,this is a txt file</span><br><span class="line"><span class="comment"># foobar</span></span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">cat</span> mcd.sh </span><br><span class="line"><span class="function"><span class="title">mcd</span></span>()&#123;</span><br><span class="line">	<span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line">	<span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># foobar</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通配符</li>
+</ul>
+<p>如果我们不想一个一个查找文件，可以使用通配符来进行匹配。</p>
+<p>比如这里<code>*</code>匹配任意字符，这里将会显示出所有含有任意字符，并以<code>.sh</code>结尾的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">ls</span></span><br><span class="line">example.sh  hello.txt  image.png  mcd.sh  project1  project2  <span class="built_in">test</span></span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">ls</span> *.sh</span><br><span class="line">example.sh  mcd.sh</span><br></pre></td></tr></table></figure>
+
+<p>现在如果我只想找有一个而不是两个特定字符的项，可以使用<code>?</code>，<code>?</code>匹配一个字符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">ls</span></span><br><span class="line">example.sh  hello.txt  image.png  mcd.sh  project1  project2  project42  <span class="built_in">test</span></span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">ls</span> project?</span><br><span class="line">project1:</span><br><span class="line">src</span><br><span class="line"></span><br><span class="line">project2:</span><br><span class="line">src</span><br></pre></td></tr></table></figure>
+
+<p>现在我们得到了匹配的目录project1和project2</p>
+<blockquote>
+<p>src是匹配的目录下的子项</p>
+</blockquote>
+<p>总而言之，通配符非常强大，你也可以组合它们。</p>
+<p>一个常用模式是花括号<code>&#123;&#125;</code>。</p>
+<p>比如目录下有一个image.png图片，我们想转变该图像的格式，一般的做法是<code>convert image.png image.jpg</code>，但是你也可以键入<code>convert image.&#123;png,jpg&#125;</code>，它会展开成上面的那行。</p>
+<p>又如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">touch</span> foo&#123;,1,2,10&#125;</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">ls</span></span><br><span class="line">example.sh  foo  foo1  foo10  foo2  hello.txt  mcd.sh project1  project2 <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>如上所述，我们可以touch一串foo，所有的foo都会被展开。</p>
+<p>你也可以进行多层操作，建立笛卡尔系：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">cat</span> &lt;(<span class="built_in">ls</span> project?/src/test)</span><br><span class="line">project1/src/test:</span><br><span class="line"></span><br><span class="line">project2/src/test:</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">touch</span> project&#123;1,2&#125;/src/test/test&#123;1,2,3&#125;.py</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">cat</span> &lt;(<span class="built_in">ls</span> project?/src/test)</span><br><span class="line">project1/src/test:</span><br><span class="line">test1.py</span><br><span class="line">test2.py</span><br><span class="line">test3.py</span><br><span class="line"></span><br><span class="line">project2/src/test:</span><br><span class="line">test1.py</span><br><span class="line">test2.py</span><br><span class="line">test3.py</span><br></pre></td></tr></table></figure>
+
+<p>如上，我们在创建文件的路径上有两组花括号，这会用两组展开式形成笛卡尔积，意味着展开后所有的路径有2*3组。因此当我们运行命令<code>touch project&#123;1,2&#125;/src/test/test&#123;1,2,3&#125;.py</code>时，实际上分别在<code>./project1/src/test/</code>目录下和<code>./project2/src/test/</code>目录下创建了<code>test1.py</code>，<code>test2.py</code>，<code>test3.py</code>文件。</p>
+<p>你也可以将<code>*</code>通配符和<code>&#123;&#125;</code>通配符结合，甚至用一些范围表示，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">mkdir</span> foo bar</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">touch</span> &#123;foo,bar&#125;/&#123;a..d&#125;</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">cat</span> &lt;(<span class="built_in">ls</span> &#123;foo,bar&#125;/)</span><br><span class="line">bar/:</span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line"></span><br><span class="line">foo/:</span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br></pre></td></tr></table></figure>
+
+<p>如上，这将会从foo&#x2F;a一直到展开到foo&#x2F;d，而bar目录下同理。</p>
+<ul>
+<li>diff</li>
+</ul>
+<p>diff 命令用于比较文件的差异。diff 以逐行的方式，比较文本文件的异同处。如果指定要比较目录，则 diff 会比较目录中相同文件名的文件，但不会比较其中子目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">touch</span> foo/x bar/y</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ diff &lt;(<span class="built_in">ls</span> foo) &lt;(<span class="built_in">ls</span> bar)</span><br><span class="line">5c5</span><br><span class="line">&lt; x</span><br><span class="line">---</span><br><span class="line">&gt; y</span><br></pre></td></tr></table></figure>
+
+<p>如上，x只在第一个文件夹里，而y只在第二个文件夹内。</p>
+<ul>
+<li>其他Shell脚本</li>
+</ul>
+<p>目前为止我们只看了bash脚本，如果你喜欢其他脚本（bash对一些工作可能并不是最好的选择），你可以用很多语言写和Shell工具交互的脚本。注意，脚本并不一定只有用 bash 写才能在终端里调用。比如说，这是一段 Python 脚本，作用是将输入的参数倒序输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">for</span> arg <span class="keyword">in</span> <span class="built_in">reversed</span>(sys.argv[<span class="number">1</span>:]):</span><br><span class="line">    <span class="built_in">print</span>(arg)</span><br></pre></td></tr></table></figure>
+
+<p>如上，python默认不会尝试和Shell交互，所以我们需要导入一些库<code>import sys</code>。第一行叫做shebang，Shell通过它了解怎么运行这个程序。</p>
+<blockquote>
+<p>shebang这个单词源于这行以<code>#!</code>开头，<code>#</code>是sharp，<code>!</code>是bang</p>
+</blockquote>
+<p>你可以随时键入类似<code>python script.py a b c</code>的命令来运行这个python脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ python script.py a b c</span><br><span class="line">c</span><br><span class="line">b</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+
+<p>但是如果想让它从Shell就能执行呢？这就需要用到shebang行。Shell用首行识别到需要用Python解释器运行这个程序，并且第一行给出了python解释器所在的路径。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ ./script.py a b c</span><br><span class="line">c</span><br><span class="line">b</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是不同的设备很可能会把python放在不同的地方，最好不要假设文件放在固定的位置，其他的东西要是如此。</p>
+<p> <code>shebang</code> 行中使用 <a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/env.1.html"><code>env</code></a> 命令，会根据给出的参数（这里是python），<code>env</code> 会利用之前的<code>PATH</code> 环境变量来进行定位，在此路径中找python二进制文件，然后用该文件去解释这个脚本。这会有更好的可移植性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">for</span> arg <span class="keyword">in</span> <span class="built_in">reversed</span>(sys.argv[<span class="number">1</span>:]):</span><br><span class="line">    <span class="built_in">print</span>(arg)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>shellcheck</li>
+</ul>
+<p>编写bash脚本有时候会很别扭和反直觉。例如 <a target="_blank" rel="noopener" href="https://github.com/koalaman/shellcheck">shellcheck</a> 这样的工具可以帮助你定位sh&#x2F;bash脚本中的错误。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/koalaman/shellcheck/tree/v0.7.1#installing">koalaman&#x2F;shellcheck at v0.7.1 (github.com)</a></p>
+</blockquote>
+<p>shellcheck可以给出warning和语法错误提示，还能指出哪些地方你没正确引用等。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ shellcheck mcd.sh</span><br><span class="line"></span><br><span class="line">In mcd.sh line 1:</span><br><span class="line"><span class="function"><span class="title">mcd</span></span>()&#123;</span><br><span class="line">^-- SC2148: Tips depend on target shell and yours is unknown. Add a shebang.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Shell函数和脚本的区别</li>
+</ul>
+<p>shell函数和脚本有如下一些不同点：</p>
+<ol>
+<li>函数只能与shell使用相同的语言，脚本可以使用任意语言。因此在脚本中包含 <code>shebang</code> 是很重要的。</li>
+<li>函数仅在定义时被加载，脚本会在每次被执行时加载。这让函数的加载比脚本略快一些，但每次修改函数定义，都要重新加载一次。</li>
+<li>函数会在当前的shell环境中执行，脚本会在单独的进程中执行。因此，函数可以对环境变量进行更改，比如改变当前工作目录，脚本则不行。脚本需要使用 <a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/export.1p.html"><code>export</code></a> 将环境变量导出，并将值传递给环境变量。</li>
+<li>与其他程序语言一样，函数可以提高代码模块性、代码复用性并创建清晰性的结构。shell脚本中往往也会包含它们自己的函数定义。</li>
+</ol>
+<h2 id="Shell工具"><a href="#Shell工具" class="headerlink" title="Shell工具"></a>Shell工具</h2><h3 id="查看命令如何使用"><a href="#查看命令如何使用" class="headerlink" title="查看命令如何使用"></a>查看命令如何使用</h3><ul>
+<li>man命令</li>
+</ul>
+<p>给出一个命令，应该怎样了解如何使用这个命令行并找出它的不同的选项呢？最常用的方法是为对应的命令行添加<code>-h</code> 或 <code>--help</code> 标记。另外一个更详细的方法则是使用<code>man</code> 命令。<code>man</code>命令是手册（manual）的缩写，它提供了命令的用户手册。</p>
+<p>事实上，目前我们给出的所有命令的说明链接，都是网页版的Linux命令手册，即使是安装的第三方命令。当然前提是开发者编写了手册并将其包含在了安装包中。在交互式的、基于字符处理的终端窗口中，一般也可以通过 <code>:help</code> 命令或键入 <code>?</code> 来获取帮助。</p>
+<ul>
+<li>tldr (too long don’t read)</li>
+</ul>
+<p>有时候手册内容太过详实，让我们难以在其中查找哪些最常用的标记和语法。<a target="_blank" rel="noopener" href="https://tldr.sh/">TLDR pages</a>是一个很不错的替代品，它提供了一些案例，可以帮助你快速找到正确的选项。</p>
+<blockquote>
+<p>下载tldr：<code>npm install -g tldr</code></p>
+<p>使用npm命令之前要先下载 <code>yum -y install npm</code></p>
+</blockquote>
+<h3 id="查找文件"><a href="#查找文件" class="headerlink" title="查找文件"></a>查找文件</h3><p>你当然可以使用ls，但是如果你想查找一个已经知道名字的文件或者目录，我们可以有更好的做法</p>
+<ul>
+<li>find</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/gexiaobaohelloworld/article/details/8206889">linux-find</a></p>
+</blockquote>
+<p>find大概是每个UNIX系统都有的工具，例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ find . -name src -<span class="built_in">type</span> d</span><br><span class="line">./project1/src</span><br><span class="line">./project2/src</span><br></pre></td></tr></table></figure>
+
+<p>这里意为，在当前文件夹<code>.</code>调用find，查找名为<code>src</code> 并且类型为目录的东西。键入以上命令，它就可以在当前目录递归查看所有符合规则的文件或者文件夹（find默认递归指定目录）。</p>
+<p>find还有许多有用的flag，比如你甚至可以查询指定格式的文件路径：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ find . -path <span class="string">&#x27;**/test/*.py&#x27;</span> -<span class="built_in">type</span> f</span><br><span class="line">./project1/src/test/test2.py</span><br><span class="line">./project1/src/test/test1.py</span><br><span class="line">./project1/src/test/test3.py</span><br><span class="line">./project2/src/test/test2.py</span><br><span class="line">./project2/src/test/test1.py</span><br><span class="line">./project2/src/test/test3.py</span><br></pre></td></tr></table></figure>
+
+<p>这里<code>**</code>是指可以匹配零或者多个目录名，然后在此路径下找到拓展名为<code>.py</code>的文件，并要求它们在一个test文件夹内，同时检查它是否为F类型（f代表文件file）</p>
+<p>运用不用的flag，可以进行非路径和非文件名的筛选：</p>
+<p>比如可以查找被修改过的文件，这里<code>-mtime</code>代表修改时间，<code>.</code>当前目录下，最近<code>1</code>天被修改过的东西都会被列出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ find . -mtime -1</span><br><span class="line">.</span><br><span class="line">./project1</span><br><span class="line">./project1/src</span><br><span class="line">./project1/src/test</span><br><span class="line">./project1/src/test/test2.py</span><br><span class="line">./project1/src/test/test1.py</span><br><span class="line">./project1/src/test/test3.py</span><br><span class="line">./project2</span><br><span class="line">./project2/src</span><br><span class="line">./project2/src/test</span><br><span class="line">./project2/src/test/test2.py</span><br><span class="line">./project2/src/test/test1.py</span><br><span class="line">./project2/src/test/test3.py</span><br><span class="line">./test</span><br><span class="line">./mcd.sh</span><br></pre></td></tr></table></figure>
+
+<p>你甚至可以使用其他条件，比如大小，所有者，权限等等。</p>
+<p>强大的是，find不仅可以查找东西，找到之后还可以做别的：例如</p>
+<p>我们可以在当前目录下查找所有扩展名为<code>.tmp</code>的文件，然后要求find对于所有这些文件，执行<code>rm</code>命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ find . -name <span class="string">&quot;*.tmp&quot;</span></span><br><span class="line">./project1/src/test/test3.tmp</span><br><span class="line">./project1/src/test/test1.tmp</span><br><span class="line">./project1/src/test/test2.tmp</span><br><span class="line">./project2/src/test/test3.tmp</span><br><span class="line">./project2/src/test/test1.tmp</span><br><span class="line">./project2/src/test/test2.tmp</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ find . -name <span class="string">&quot;*.tmp&quot;</span> -<span class="built_in">exec</span> <span class="built_in">rm</span> &#123;&#125; \;</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">echo</span> $?</span><br><span class="line">0</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ find . -name <span class="string">&quot;*.tmp&quot;</span></span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ </span><br></pre></td></tr></table></figure>
+
+<p>如上，执行<code>find . -name &quot;*.tmp&quot; -exec rm &#123;&#125; \;</code>后，对应的tmp文件都被删除了。</p>
+<ul>
+<li>fd</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/sharkdp/fd"><code>fd</code></a> 是一个更简单、更快速、更友好的程序，它可以用来作为<code>find</code>的替代品。它有很多不错的默认设置，例如输出着色、默认支持正则匹配、支持unicode并且我认为它的语法更符合直觉。以模式<code>PATTERN</code> 搜索的语法是 <code>fd PATTERN</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ fd <span class="string">&quot;.*py&quot;</span></span><br><span class="line">project1/src/test/test1.py</span><br><span class="line">project1/src/test/test2.py</span><br><span class="line">project1/src/test/test3.py</span><br><span class="line">project2/src/test/test1.py</span><br><span class="line">project2/src/test/test2.py</span><br><span class="line">project2/src/test/test3.py</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>locate</li>
+</ul>
+<p>大多数人都认为 <code>find</code> 和 <code>fd</code> 已经很好用了，但是有的人可能想知道，我们是不是可以有更高效的方法，例如不要每次都搜索文件而是通过编译索引或建立数据库的方式来实现更加快速地搜索。</p>
+<p>这就要靠 <a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/locate.1.html"><code>locate</code></a> 了。 <code>locate</code> 使用一个由 <a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/updatedb.1.html"><code>updatedb</code></a>负责更新的数据库，在大多数系统中 <code>updatedb</code> 都会通过 <a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man8/cron.8.html"><code>cron</code></a> 每日更新。这便需要我们在速度和时效性之间作出权衡。而且，<code>find</code> 和类似的工具可以通过别的属性比如文件大小、修改时间或是权限来查找文件，<code>locate</code>则只能通过文件名。 <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/60205/locate-vs-find-usage-pros-and-cons-of-each-other">这里</a>有一个更详细的对比。</p>
+<h3 id="查找代码"><a href="#查找代码" class="headerlink" title="查找代码"></a>查找代码</h3><p>查找文件是很有用的技能，但是很多时候你的目标其实是查看文件的内容。常见的场景是查找具有匹配某种模式的全部文件，并找它们的位置。</p>
+<ul>
+<li>grep</li>
+</ul>
+<p>grep是用于对输入文本进行匹配的通用工具。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ grep foobar mcd.sh </span><br><span class="line"><span class="comment"># foobar</span></span><br></pre></td></tr></table></figure>
+
+<p>使用-R可以递归地搜索</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ grep -R foobar .</span><br><span class="line">./example.sh:        grep foobar <span class="string">&quot;<span class="variable">$file</span>&quot;</span> &gt; /dev/null 2&gt; /dev/null</span><br><span class="line">./example.sh:                <span class="built_in">echo</span> <span class="string">&quot;File <span class="variable">$file</span> does not have any foobar, adding one&quot;</span></span><br><span class="line">./example.sh:                <span class="built_in">echo</span> <span class="string">&quot;# foobar&quot;</span> &gt;&gt; <span class="string">&quot;<span class="variable">$file</span>&quot;</span></span><br><span class="line">./hello.txt:<span class="comment"># foobar</span></span><br><span class="line">./mcd.sh:<span class="comment"># foobar</span></span><br></pre></td></tr></table></figure>
+
+<p><code>grep</code> 有很多选项，这也使它成为一个非常全能的工具。 <code>-C</code> ：获取查找结果的上下文（Context）；<code>-v</code> 将对结果进行反选（Invert），也就是输出不匹配的结果。举例来说， <code>grep -C 5</code> 会输出匹配结果前后五行。当需要搜索大量文件的时候，使用 <code>-R</code> 会递归地进入子目录并搜索所有的文本文件。但是也有很多办法可以对 <code>grep -R</code> 进行改进，例如使其忽略<code>.git</code> 文件夹，使用多CPU等等。</p>
+<ul>
+<li>rg（ripgrep）</li>
+</ul>
+<p>此外还出现了很多grep的替代品，包括 <a target="_blank" rel="noopener" href="https://beyondgrep.com/">ack</a>, <a target="_blank" rel="noopener" href="https://github.com/ggreer/the_silver_searcher">ag</a> 和 <a target="_blank" rel="noopener" href="https://github.com/BurntSushi/ripgrep">rg</a>。它们都特别好用，但是功能也都差不多，比较常用的是 ripgrep (<code>rg</code>) ，因为它速度快，而且用法非常符合直觉。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://outmanzzq.github.io/2019/11/13/ripgrep/">rg安装</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ rg <span class="string">&quot;foobar&quot;</span> -t sh ~/</span><br><span class="line">/home/lighthouse/missing/tools/mcd.sh</span><br><span class="line">5:<span class="comment"># foobar</span></span><br><span class="line"></span><br><span class="line">/home/lighthouse/missing/tools/example.sh</span><br><span class="line">8:        grep foobar <span class="string">&quot;<span class="variable">$file</span>&quot;</span> &gt; /dev/null 2&gt; /dev/null</span><br><span class="line">12:                <span class="built_in">echo</span> <span class="string">&quot;File <span class="variable">$file</span> does not have any foobar, adding one&quot;</span></span><br><span class="line">13:                <span class="built_in">echo</span> <span class="string">&quot;# foobar&quot;</span> &gt;&gt; <span class="string">&quot;<span class="variable">$file</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>如上，该命令在<code>~/</code>目录下搜索类型(-t即type)为sh，并且文件内有“foobar”子串的文件。</p>
+<p>rg不仅能找到对应文件，还能精确到匹配的行，比起使用grep，它还增加了代码彩色显示和文件处理啥的，也有Unicode支持，并且运行很快。</p>
+<p>rg有许多有用的flag，比如说你想要点上下文(匹配内容的附近内容)，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ rg <span class="string">&quot;foobar&quot;</span> -t sh -C 5 ~/</span><br><span class="line">/home/lighthouse/missing/tools/mcd.sh</span><br><span class="line">1-<span class="function"><span class="title">mcd</span></span>()&#123;</span><br><span class="line">2-	<span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line">3-	<span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line">4-&#125;</span><br><span class="line">5:<span class="comment"># foobar</span></span><br><span class="line"></span><br><span class="line">/home/lighthouse/missing/tools/example.sh</span><br><span class="line">3-<span class="built_in">echo</span> <span class="string">&quot;Start program at <span class="subst">$(date)</span>&quot;</span> <span class="comment"># Date will be substituted</span></span><br><span class="line">4-</span><br><span class="line">5-<span class="built_in">echo</span> <span class="string">&quot;Running program <span class="variable">$0</span> with <span class="variable">$#</span> arguments with pid $$&quot;</span></span><br><span class="line">6-</span><br><span class="line">7-<span class="keyword">for</span> file <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span>;<span class="keyword">do</span></span><br><span class="line">8:        grep foobar <span class="string">&quot;<span class="variable">$file</span>&quot;</span> &gt; /dev/null 2&gt; /dev/null</span><br><span class="line">9-        <span class="comment"># When pattern is not found,grep has exit status</span></span><br><span class="line">10-        <span class="comment"># We redirect STDOUT and STDERR to a null register ..</span></span><br><span class="line">11-        <span class="keyword">if</span> [[ <span class="string">&quot;$?&quot;</span> -ne 0 ]]; <span class="keyword">then</span></span><br><span class="line">12:                <span class="built_in">echo</span> <span class="string">&quot;File <span class="variable">$file</span> does not have any foobar, adding one&quot;</span></span><br><span class="line">13:                <span class="built_in">echo</span> <span class="string">&quot;# foobar&quot;</span> &gt;&gt; <span class="string">&quot;<span class="variable">$file</span>&quot;</span></span><br><span class="line">14-        <span class="keyword">fi</span>      </span><br><span class="line">15-<span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>如上，我们加上<code>-C [num]</code>（C意为context），不仅能够搜索到匹配内容，还能对每一个匹配的内容显示其前后[num]行的内容。这样你就可以知道匹配内容大概在什么位置，它周围都是什么内容。这个功能在查找在哪调用了什么函数 上十分有用。</p>
+<p>我们也可以使用一个更高级的用法：</p>
+<p><code>-u</code>意为不忽略隐藏文件，<code>--files-without-match</code>是打印出所有不匹配这个pattern的内容，<code>&#39;#!&#39;</code>的意思是匹配有<code>#!</code>的内容。也就是说，我们在搜索没有shebang的文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ rg -u --files-without-match <span class="string">&#x27;#!&#x27;</span> -t sh</span><br><span class="line">mcd.sh</span><br></pre></td></tr></table></figure>
+
+<p>此外rg还有些好用的flag，比如<code>--stats</code>这个flag，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ rg <span class="string">&quot;foobar&quot;</span> -t sh -C 5 --stats ~/</span><br><span class="line">/home/lighthouse/missing/tools/mcd.sh</span><br><span class="line">1-<span class="function"><span class="title">mcd</span></span>()&#123;</span><br><span class="line">2-	<span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line">3-	<span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line">4-&#125;</span><br><span class="line">5:<span class="comment"># foobar</span></span><br><span class="line"></span><br><span class="line">/home/lighthouse/missing/tools/example.sh</span><br><span class="line">3-<span class="built_in">echo</span> <span class="string">&quot;Start program at <span class="subst">$(date)</span>&quot;</span> <span class="comment"># Date will be substituted</span></span><br><span class="line">4-</span><br><span class="line">5-<span class="built_in">echo</span> <span class="string">&quot;Running program <span class="variable">$0</span> with <span class="variable">$#</span> arguments with pid $$&quot;</span></span><br><span class="line">6-</span><br><span class="line">7-<span class="keyword">for</span> file <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span>;<span class="keyword">do</span></span><br><span class="line">8:        grep foobar <span class="string">&quot;<span class="variable">$file</span>&quot;</span> &gt; /dev/null 2&gt; /dev/null</span><br><span class="line">9-        <span class="comment"># When pattern is not found,grep has exit status</span></span><br><span class="line">10-        <span class="comment"># We redirect STDOUT and STDERR to a null register ..</span></span><br><span class="line">11-        <span class="keyword">if</span> [[ <span class="string">&quot;$?&quot;</span> -ne 0 ]]; <span class="keyword">then</span></span><br><span class="line">12:                <span class="built_in">echo</span> <span class="string">&quot;File <span class="variable">$file</span> does not have any foobar, adding one&quot;</span></span><br><span class="line">13:                <span class="built_in">echo</span> <span class="string">&quot;# foobar&quot;</span> &gt;&gt; <span class="string">&quot;<span class="variable">$file</span>&quot;</span></span><br><span class="line">14-        <span class="keyword">fi</span>      </span><br><span class="line">15-<span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">4 matches</span><br><span class="line">4 matched lines</span><br><span class="line">2 files contained matches</span><br><span class="line">5 files searched</span><br><span class="line">643 bytes printed</span><br><span class="line">978 bytes searched</span><br><span class="line">0.000054 seconds spent searching</span><br><span class="line">0.002657 seconds</span><br></pre></td></tr></table></figure>
+
+<p>如上，它除了搜索结果之外，还可以输出一些信息。比如成功匹配了多少行，查找了多少行和多少文件，打印了多少byte等。</p>
+<ul>
+<li>ack</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://beyondgrep.com/">ack</a>也是grep的一个替代工具，还有<a target="_blank" rel="noopener" href="https://github.com/ggreer/the_silver_searcher">ag</a> 。当然这些工具都是可以替换的，只要会使用即可。</p>
+<h3 id="查找shell命令"><a href="#查找shell命令" class="headerlink" title="查找shell命令"></a>查找shell命令</h3><ul>
+<li>向上箭头</li>
+</ul>
+<p>首先，按向上的方向键会显示你使用过的上一条命令，继续按上键则会遍历整个历史记录。</p>
+<p>向上箭头并不是很有效率，所以bash有一些更加简单的方法。</p>
+<ul>
+<li>history</li>
+</ul>
+<p>它会打印出你的命令历史记录，当然一般来讲这会输出非常多的记录，你可以使用管道和grep来筛选。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">history</span> | grep <span class="built_in">echo</span></span><br><span class="line">   74  2022-12-29 01:16:27 <span class="built_in">echo</span> $?</span><br><span class="line">  112  2022-12-29 01:45:37 <span class="built_in">echo</span> <span class="string">&quot;# foobar&quot;</span> &gt;&gt; mdc.sh</span><br><span class="line">  115  2022-12-29 01:46:01 <span class="built_in">echo</span> <span class="string">&quot;# foobar&quot;</span> &gt;&gt; mcd.sh</span><br><span class="line">  126  2022-12-29 01:50:42 <span class="built_in">echo</span> <span class="string">&quot;hello,i am a txt file&quot;</span> &gt; hello.txt</span><br><span class="line">  197  2022-12-30 01:06:13 <span class="built_in">history</span> | grep <span class="built_in">echo</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Ctrl+R</li>
+</ul>
+<p>基本上，所有Shell都会默认把Ctrl+R这个组合键设成（按执行时间）倒叙搜索（backward search）</p>
+<p>我们打开（按ctrl+r）倒叙搜索，然后输入<code>echo</code>，就会找到与之匹配的命令，如果我们接着按ctrl+r，就会倒着往前搜索匹配的命令，也可以重新执行命令。</p>
+<ul>
+<li>fzf</li>
+</ul>
+<p><code>Ctrl+R</code> 可以配合 <a target="_blank" rel="noopener" href="https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings#ctrl-r">fzf</a> 使用。<code>fzf</code> 是一个通用对模糊查找工具，它可以和很多命令一起使用。这里我们可以对历史命令进行模糊查找并将结果以赏心悦目的格式输出</p>
+<ul>
+<li>基于历史的自动补全</li>
+</ul>
+<p>另外一个和历史命令相关的技巧我喜欢称之为<strong>基于历史的自动补全</strong>。 这一特性最初是由 <a target="_blank" rel="noopener" href="https://fishshell.com/">fish</a> shell 创建的，它可以根据你最近使用过的开头相同的命令，动态地对当前对shell命令进行补全。这一功能在 <a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-autosuggestions">zsh</a> 中也可以使用，它可以极大的提高用户体验。</p>
+<blockquote>
+<p>你可以修改 shell history 的行为，例如，如果在命令的开头加上一个空格，它就不会被加进shell记录中。当你输入包含密码或是其他敏感信息的命令时会用到这一特性。 为此你需要在<code>.bashrc</code>中添加<code>HISTCONTROL=ignorespace</code>或者向<code>.zshrc</code> 添加 <code>setopt HIST_IGNORE_SPACE</code>。 如果你不小心忘了在前面加空格，可以通过编辑。<code>bash_history</code>或 <code>.zhistory</code> 来手动地从历史记录中移除那一项。</p>
+</blockquote>
+<h3 id="文件夹导航"><a href="#文件夹导航" class="headerlink" title="文件夹导航"></a>文件夹导航</h3><p>你可以使用<code>ls -R</code>递归地列出某目录下所有的文件和目录，但是这样列出的东西比较难理解。</p>
+<ul>
+<li>tree</li>
+</ul>
+<p>有一个叫<code>tree</code>的工具可以以比较友好的格式打印出目录的结构。</p>
+<blockquote>
+<p>centos安装：sudo yum -y install tree</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ tree /home</span><br><span class="line">/home</span><br><span class="line">`-- lighthouse</span><br><span class="line">    `-- missing</span><br><span class="line">        `-- tools</span><br><span class="line">            |-- example.sh</span><br><span class="line">            |-- hello.txt</span><br><span class="line">            |-- mcd.sh</span><br><span class="line">            |-- project1</span><br><span class="line">            |   `-- src</span><br><span class="line">            |       `-- <span class="built_in">test</span></span><br><span class="line">            |           |-- test1.py</span><br><span class="line">            |           |-- test2.py</span><br><span class="line">            |           `-- test3.py</span><br><span class="line">            |-- project2</span><br><span class="line">            |   `-- src</span><br><span class="line">            |       `-- <span class="built_in">test</span></span><br><span class="line">            |           |-- test1.py</span><br><span class="line">            |           |-- test2.py</span><br><span class="line">            |           `-- test3.py</span><br><span class="line">            `-- <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line">10 directories, 9 files</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>broot</li>
+</ul>
+<p>broot也是做差不多的事情，但是比起列出所有文件，它会提示[还有更多文件，未列出]。你可以输入字符，broot可以模糊匹配符合条件的文件，并进行动态显示。这样你就可以快速的选择和定位。</p>
+<ul>
+<li>nnn</li>
+</ul>
+<p>nnn 默认列出运行 nnn 的当前目录的文件和文件夹。 文件夹列在顶部，而文件列在底部。而且是一个交互性的窗口，你可以通过向左箭头返回上一级目录，通过向右箭头到达子目录。按q即可退出窗口。</p>
+<blockquote>
+<p>centos 安装 nnn ：sudo yum install nnn</p>
+</blockquote>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20221230014444510.png" alt="image-20221230014444510" style="zoom:60%;" />
+
+<ul>
+<li>ranger</li>
+</ul>
+<p>ranger 是一个基于文本的由 Python 编写的文件管理器。不同层级的目录分别在一个面板的三列中进行展示. 可以通过快捷键, 书签, 鼠标以及历史命令在它们之间移动. 当选中文件或目录时, 会自动显示文件或目录的内容。</p>
+<hr>
+<p>由于本课程的目的是尽可能对你的日常习惯进行优化。因此，我们可以使用<a target="_blank" rel="noopener" href="https://github.com/clvv/fasd">fasd</a>和 <a target="_blank" rel="noopener" href="https://github.com/wting/autojump">autojump</a> 这两个工具来查找最常用或最近使用的文件和目录。</p>
+<p>Fasd 基于 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places/Frecency_algorithm">frecency </a>对文件和文件排序，也就是说它会同时针对频率（frequency）和时效（recency）进行排序。默认情况下，<code>fasd</code>使用命令 <code>z</code> 帮助我们快速切换到最常访问的目录。例如， 如果您经常访问<code>/home/user/files/cool_project</code> 目录，那么可以直接使用 <code>z cool</code> 跳转到该目录。对于 autojump，则使用<code>j cool</code>代替即可。</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ol>
+<li><p>阅读 <a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/ls.1.html"><code>man ls</code></a> ，然后使用<code>ls</code> 命令进行如下操作：</p>
+<ul>
+<li>所有文件（包括隐藏文件）</li>
+<li>文件打印以人类可以理解的格式输出 (例如，使用454M 而不是 454279954)</li>
+<li>文件以最近访问顺序排序</li>
+<li>以彩色文本显示输出结果</li>
+</ul>
+<p>典型输出如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--   1 user group 1.1M Jan 14 09:53 baz</span><br><span class="line">drwxr-xr-x   5 user group  160 Jan 14 09:53 .</span><br><span class="line">-rw-r--r--   1 user group  514 Jan 14 06:42 bar</span><br><span class="line">-rw-r--r--   1 user group 106M Jan 13 12:12 foo</span><br><span class="line">drwx------+ 47 user group 1.5K Jan 12 18:08 ..</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>练习：</p>
+<p>(1) 显示包括隐藏文件</p>
+<blockquote>
+<p>-a, –all<br>             do not ignore entries starting with .</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">ls</span> -a</span><br><span class="line">.  ..  example.sh  hello.txt  mcd.sh  project1  project2  <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>(2) 文件以人类可以理解的格式输出</p>
+<blockquote>
+<p>-h, –human-readable<br>              with -l, print sizes in human readable format (e.g., 1K 234M 2G)</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">ls</span> -hl</span><br><span class="line">total 24K</span><br><span class="line">-rwxrwxr-- 1 lighthouse lighthouse  494 Dec 29 01:49 example.sh</span><br><span class="line">-rw-rw-r-- 1 lighthouse lighthouse   31 Dec 29 01:55 hello.txt</span><br><span class="line">-rw-rwxr-- 1 lighthouse lighthouse   42 Dec 29 01:46 mcd.sh</span><br><span class="line">drwxrwxr-x 3 lighthouse lighthouse 4.0K Dec 29 00:47 project1</span><br><span class="line">drwxrwxr-x 3 lighthouse lighthouse 4.0K Dec 29 00:47 project2</span><br><span class="line">drwxrwxr-x 2 lighthouse lighthouse 4.0K Dec 29 00:55 <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>(3) 文件以最近访问顺序排序</p>
+<blockquote>
+<p>-t     sort by modification time, newest first</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">ls</span> -lt</span><br><span class="line">total 24</span><br><span class="line">-rw-rw-r-- 1 lighthouse lighthouse   31 Dec 29 01:55 hello.txt</span><br><span class="line">-rwxrwxr-- 1 lighthouse lighthouse  494 Dec 29 01:49 example.sh</span><br><span class="line">-rw-rwxr-- 1 lighthouse lighthouse   42 Dec 29 01:46 mcd.sh</span><br><span class="line">drwxrwxr-x 2 lighthouse lighthouse 4096 Dec 29 00:55 <span class="built_in">test</span></span><br><span class="line">drwxrwxr-x 3 lighthouse lighthouse 4096 Dec 29 00:47 project1</span><br><span class="line">drwxrwxr-x 3 lighthouse lighthouse 4096 Dec 29 00:47 project2</span><br></pre></td></tr></table></figure>
+
+<p>(4) 以彩色文本显示输出结果</p>
+<blockquote>
+<p>–color[&#x3D;WHEN]<br>             colorize the output; WHEN can be ‘never’, ‘auto’, or ‘always’ (the default); more info below</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">ls</span> --color=auto</span><br><span class="line">example.sh  hello.txt  mcd.sh  project1  project2  <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>综合：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">ls</span> -laht --color=auto</span><br><span class="line">total 32K</span><br><span class="line">drwxrwxr-x 5 lighthouse lighthouse 4.0K Dec 30 01:14 .</span><br><span class="line">-rw-rw-r-- 1 lighthouse lighthouse   31 Dec 29 01:55 hello.txt</span><br><span class="line">-rwxrwxr-- 1 lighthouse lighthouse  494 Dec 29 01:49 example.sh</span><br><span class="line">-rw-rwxr-- 1 lighthouse lighthouse   42 Dec 29 01:46 mcd.sh</span><br><span class="line">drwxrwxr-x 2 lighthouse lighthouse 4.0K Dec 29 00:55 <span class="built_in">test</span></span><br><span class="line">drwxrwxr-x 3 lighthouse lighthouse 4.0K Dec 29 00:47 project1</span><br><span class="line">drwxrwxr-x 3 lighthouse lighthouse 4.0K Dec 29 00:47 project2</span><br><span class="line">drwxrwxr-x 3 lighthouse lighthouse 4.0K Dec 29 00:46 ..</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写两个bash函数 <code>marco</code> 和 <code>polo</code> 执行下面的操作。 每当你执行 <code>marco</code> 时，当前的工作目录应当以某种形式保存，当执行 <code>polo</code> 时，无论现在处在什么目录下，都应当 <code>cd</code> 回到当时执行 <code>marco</code> 的目录。 为了方便debug，你可以把代码写在单独的文件 <code>marco.sh</code> 中，并通过 <code>source marco.sh</code>命令，（重新）加载函数。</p>
+<p>练习：</p>
+<p>marco.sh:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">marco</span></span>()&#123;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="subst">$(pwd)</span>&quot;</span> &gt; ~/pwd.txt</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">polo</span></span>()&#123;</span><br><span class="line">jump=$(<span class="built_in">cat</span> ~/pwd.txt)</span><br><span class="line"><span class="comment"># 使用$(命令)的方式可以赋给变量</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$jump</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;You had alread jump to --&gt;<span class="variable">$jump</span>&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">source</span> marco.sh</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ marco</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ <span class="built_in">cd</span> /</span><br><span class="line">[lighthouse@VM-8-17-centos /]$ polo</span><br><span class="line">You had alread jump to --&gt;/home/lighthouse/missing/tools</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>假设您有一个命令，它很少出错。因此为了在出错时能够对其进行调试，需要花费大量的时间重现错误并捕获输出。 编写一段bash脚本，运行如下的脚本直到它出错，将它的标准输出和标准错误流记录到文件，并在最后输出所有内容。 加分项：报告脚本在失败前共运行了多少次。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line">   </span><br><span class="line">n=$(( RANDOM % <span class="number">100</span> ))</span><br><span class="line">   </span><br><span class="line"><span class="keyword">if</span> [[ n -eq 42 ]]; <span class="keyword">then</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">&quot;Something went wrong&quot;</span></span><br><span class="line">   &gt;&amp;2 <span class="built_in">echo</span> <span class="string">&quot;The error was using magic numbers&quot;</span></span><br><span class="line">   <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">   </span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Everything went according to plan&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<p>上述脚本的意思是，取一个随机数（RANDOM变量用于生成0~32767之前的任意随机数），随机数模100。如果结果等于42，就输出两句话，然后返回1退出码；否则就输出”Everything went according to plan“</p>
+<blockquote>
+<p>这里的<code>&gt;&amp;2</code>的意思是  将标准输出1和标准错误输出2 都重定向到终端中（标准输出或标准错误输出的目的地默认都为终端）</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/itsharehome/p/8503206.html">Linux shell标准输入，标准输出，错误输出</a></p>
+</blockquote>
+<p>run.sh（buggy.sh为题目的脚本名）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">count=1</span><br><span class="line">   </span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    ./buggy.sh 1&gt;&gt; out.log 2&gt;&amp;1 <span class="comment">#把stout和sterr一起重定向到out.log文件中(追加)</span></span><br><span class="line">    <span class="keyword">if</span> [[ $? -ne 0 ]]; <span class="keyword">then</span></span><br><span class="line"> 	 <span class="built_in">echo</span> <span class="string">&quot;运行错误，记录在out.log中&quot;</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;共运行 <span class="variable">$count</span> 次&quot;</span></span><br><span class="line">        <span class="built_in">break</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    ((count++))</span><br><span class="line">   </span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos tools]$ ./run.sh </span><br><span class="line">运行错误，记录在out.log中</span><br><span class="line">共运行 82 次</span><br><span class="line">[lighthouse@VM-8-17-centos tools]$ ./run.sh </span><br><span class="line">运行错误，记录在out.log中</span><br><span class="line">共运行 42 次</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>本节课我们讲解的 <code>find</code> 命令中的 <code>-exec</code> 参数非常强大，它可以对我们查找的文件进行操作。但是，如果我们要对所有文件进行操作呢？例如创建一个zip压缩文件？我们已经知道，命令行可以从参数或标准输入接受输入。在用管道连接命令时，我们将标准输出和标准输入连接起来，但是有些命令，例如<code>tar</code> 则需要从参数接受输入。这里我们可以使用<a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/xargs.1.html"><code>xargs</code></a> 命令，它可以使用标准输入中的内容作为参数。 例如 <code>ls | xargs rm</code> 会删除当前目录中的所有文件。</p>
+<p>您的任务是编写一个命令，它可以递归地查找文件夹中所有的HTML文件，并将它们压缩成zip文件。注意，即使文件名中包含空格，您的命令也应该能够正确执行（提示：查看 <code>xargs</code>的参数<code>-d</code>，译注：MacOS 上的 <code>xargs</code>没有<code>-d</code>，<a target="_blank" rel="noopener" href="https://github.com/missing-semester/missing-semester/issues/93">查看这个issue</a>）</p>
+<p>如果您使用的是 MacOS，请注意默认的 BSD <code>find</code> 与 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/List_of_GNU_Core_Utilities_commands">GNU coreutils</a> 中的是不一样的。你可以为<code>find</code>添加<code>-print0</code>选项，并为<code>xargs</code>添加<code>-0</code>选项。作为 Mac 用户，您需要注意 mac 系统自带的命令行工具和 GNU 中对应的工具是有区别的；如果你想使用 GNU 版本的工具，也可以使用 <a target="_blank" rel="noopener" href="https://formulae.brew.sh/formula/coreutils">brew 来安装</a>。</p>
+<p>练习：</p>
+<p>事先在当前文件夹下创建了一些html文件（包括带有空格的he llo.html）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos question4]$ tree </span><br><span class="line">.</span><br><span class="line">|-- he\ llo.html</span><br><span class="line">|-- index.html</span><br><span class="line">|-- project1</span><br><span class="line">|   |-- <span class="built_in">test</span></span><br><span class="line">|   |-- test1.html</span><br><span class="line">|   |-- test2.html</span><br><span class="line">|   `-- test3.html</span><br><span class="line">|-- project2</span><br><span class="line">|   |-- <span class="built_in">test</span></span><br><span class="line">|   |-- test1.html</span><br><span class="line">|   |-- test2.html</span><br><span class="line">|   `-- test3.html</span><br><span class="line">|-- test1.html</span><br><span class="line">|-- test2.html</span><br><span class="line">|-- test3.html</span><br><span class="line">|-- test4.html</span><br><span class="line">|-- test5.html</span><br><span class="line">|-- test6.html</span><br><span class="line">|-- test7.html</span><br><span class="line">|-- test8.html</span><br><span class="line">`-- test9.html</span><br><span class="line"></span><br><span class="line">4 directories, 17 files</span><br></pre></td></tr></table></figure>
+
+<p>使用命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos question4]$ find .  -name <span class="string">&quot;*.html&quot;</span> | xargs -d <span class="string">&#x27;\n&#x27;</span> tar -cf html.zip</span><br></pre></td></tr></table></figure>
+
+<p>查看压缩包内容：</p>
+<p>可以看到包括有空格文件名的html在内全部压缩成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos question4]$ tar -tf html.zip </span><br><span class="line">./project1/test3.html</span><br><span class="line">./project1/test2.html</span><br><span class="line">./project1/test1.html</span><br><span class="line">./test6.html</span><br><span class="line">./test3.html</span><br><span class="line">./test8.html</span><br><span class="line">./test4.html</span><br><span class="line">./test9.html</span><br><span class="line">./project2/test3.html</span><br><span class="line">./project2/test2.html</span><br><span class="line">./project2/test1.html</span><br><span class="line">./test5.html</span><br><span class="line">./he llo.html</span><br><span class="line">./test2.html</span><br><span class="line">./index.html</span><br><span class="line">./test1.html</span><br><span class="line">./test7.html</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/141500550">xargs使用教程 </a>    <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/91593509">Linux下查看压缩文件内容的 10 种方法</a></p>
+<p>使用 <code>tar -tf</code> 命令可以在不提取 <code>tar</code> 文件的情况下查看压缩包内容。</p>
+</blockquote>
+</li>
+<li><p>（进阶）编写一个命令或脚本递归的查找文件夹中最近使用的文件。更通用的做法，你可以按照最近的使用时间列出文件吗？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[lighthouse@VM-8-17-centos question4]$ find . -<span class="built_in">type</span> f -mmin -120 | xargs -d <span class="string">&#x27;\n&#x27;</span>  <span class="built_in">ls</span> -tl | <span class="built_in">head</span> -3</span><br><span class="line">-rw-rw-r-- 1 lighthouse lighthouse 10240 Jan  3 22:01 ./html.zip</span><br><span class="line">-rw-rw-r-- 1 lighthouse lighthouse     0 Jan  3 21:36 ./he llo.html</span><br><span class="line">-rw-rw-r-- 1 lighthouse lighthouse     0 Jan  3 21:15 ./project1/test1.html</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/01/12/00-15-22/" rel="prev" title="主题 3 编辑器(Vim)">
+                主题 3 编辑器(Vim) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat_header.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98-2-Shell%E5%B7%A5%E5%85%B7%E5%92%8C%E8%84%9A%E6%9C%AC"><span class="nav-text">主题 2 Shell工具和脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell%E8%84%9A%E6%9C%AC"><span class="nav-text">Shell脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell%E5%B7%A5%E5%85%B7"><span class="nav-text">Shell工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="nav-text">查看命令如何使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6"><span class="nav-text">查找文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E4%BB%A3%E7%A0%81"><span class="nav-text">查找代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BEshell%E5%91%BD%E4%BB%A4"><span class="nav-text">查找shell命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B9%E5%AF%BC%E8%88%AA"><span class="nav-text">文件夹导航</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-text">练习</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liyuelian</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style='display:none'>
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

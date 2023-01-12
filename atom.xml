@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>liyuelian&#39;blogs</title>
+  
+  <subtitle>忽如远行客</subtitle>
+  <link href="https://liyuelian.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://liyuelian.github.io/"/>
+  <updated>2023-01-12T16:21:57.625Z</updated>
+  <id>https://liyuelian.github.io/</id>
+  
+  <author>
+    <name>liyuelian</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo博客搭建记录</title>
+    <link href="https://liyuelian.github.io/2023/01/12/22-36-04/"/>
+    <id>https://liyuelian.github.io/2023/01/12/22-36-04/</id>
+    <published>2023-01-12T14:36:04.000Z</published>
+    <updated>2023-01-12T16:21:57.625Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Hexo博客搭建记录&quot;&gt;&lt;a href=&quot;#Hexo博客搭建记录&quot; class=&quot;headerlink&quot; title=&quot;Hexo博客搭建记录&quot;&gt;&lt;/a&gt;Hexo博客搭建记录&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;参考视频：&lt;a href=&quot;https://www.bilibili.com/video/av44544186/?vd_source=7e137c3a1559f85aacb1f151bb0a830d&quot;&gt;手把手教你从0开始搭建自己的个人博客 |无坑版视频教程&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;以下命令操作建议使用管理员权限完成&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;1-nodejs-amp-hexo-安装&quot;&gt;&lt;a href=&quot;#1-nodejs-amp-hexo-安装&quot; class=&quot;headerlink&quot; title=&quot;1. nodejs &amp;amp; hexo 安装&quot;&gt;&lt;/a&gt;1. nodejs &amp;amp; hexo 安装&lt;/h2&gt;&lt;p&gt;1.首先下载node.js，并安装（安装node时，会自动安装npm），安装完毕后在控制台输入&lt;code&gt;node -v&lt;/code&gt;，如果显示版本则说明安装成功。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="杂记" scheme="https://liyuelian.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+    <category term="hexo" scheme="https://liyuelian.github.io/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HelloWorld!</title>
+    <link href="https://liyuelian.github.io/2023/01/12/22-29-15/"/>
+    <id>https://liyuelian.github.io/2023/01/12/22-29-15/</id>
+    <published>2023-01-12T14:29:15.000Z</published>
+    <updated>2023-01-12T16:18:56.856Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;</summary>
+    
+    
+    
+    <category term="杂记" scheme="https://liyuelian.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>主题 1 The Shell</title>
+    <link href="https://liyuelian.github.io/2023/01/12/00-15-22/"/>
+    <id>https://liyuelian.github.io/2023/01/12/00-15-22/</id>
+    <published>2023-01-11T16:15:22.000Z</published>
+    <updated>2023-01-12T16:21:30.782Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;主题-1-The-Shell&quot;&gt;&lt;a href=&quot;#主题-1-The-Shell&quot; class=&quot;headerlink&quot; title=&quot;主题 1 The Shell&quot;&gt;&lt;/a&gt;主题 1 The Shell&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://missing-semester-cn.github.io/2020/course-shell/&quot;&gt;课程概览与 shell · the missing semester of your cs education (missing-semester-cn.github.io)&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Shell是什么？&quot;&gt;&lt;a href=&quot;#Shell是什么？&quot; class=&quot;headerlink&quot; title=&quot;Shell是什么？&quot;&gt;&lt;/a&gt;Shell是什么？&lt;/h2&gt;&lt;p&gt;一旦你想脱离可视化界面让你做的，然后做点别的事情，那么Shell将是你和计算机交互的最主要的方式之一。&lt;/p&gt;
+&lt;p&gt;可视化界面受限于，它只能做被设计出来的操作——比如你不能点击一个不存在的按钮或者是用语音输入一个还没有被录入的指令。这就是这门课介绍命令行工具和基于文本的工具的理由，shell则是你去做这些操作的地方。&lt;/p&gt;
+&lt;p&gt;在Windows和Linux可以找到成堆的终端（Terminal），这些是能显示Shell的文本窗口。其中普遍的是bash，或者叫Bourne Again Shell。由于bash的普遍性，这门课中将使用bash。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="the missing semester of cs" scheme="https://liyuelian.github.io/categories/the-missing-semester-of-cs/"/>
+    
+    
+    <category term="linux" scheme="https://liyuelian.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>主题 3 编辑器(Vim)</title>
+    <link href="https://liyuelian.github.io/2023/01/12/00-15-22/"/>
+    <id>https://liyuelian.github.io/2023/01/12/00-15-22/</id>
+    <published>2023-01-11T16:15:22.000Z</published>
+    <updated>2023-01-12T16:21:45.174Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;主题-3-编辑器-Vim&quot;&gt;&lt;a href=&quot;#主题-3-编辑器-Vim&quot; class=&quot;headerlink&quot; title=&quot;主题 3 编辑器(Vim)&quot;&gt;&lt;/a&gt;主题 3 编辑器(Vim)&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://missing-semester-cn.github.io/2020/editors/&quot;&gt;编辑器 (Vim) · the missing semester of your cs education (missing-semester-cn.github.io)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;代码编辑器和和其他的编辑器（比如用来写文章的编辑器）有一些不同。&lt;/p&gt;
+&lt;p&gt;这是因为写程序和写文章不同。当你写程序时，会花大量时间来阅读你写的东西，或者来移动光标，做一些小小的修改；而不是像写文章的时候，从上到下一气呵成。因此，对于不同的用途，我们会使用不同的编辑器，这是很合理的。&lt;/p&gt;
+&lt;h2 id=&quot;1-该学哪个编辑器&quot;&gt;&lt;a href=&quot;#1-该学哪个编辑器&quot; class=&quot;headerlink&quot; title=&quot;1.该学哪个编辑器?&quot;&gt;&lt;/a&gt;1.该学哪个编辑器?&lt;/h2&gt;</summary>
+    
+    
+    
+    <category term="the missing semester of cs" scheme="https://liyuelian.github.io/categories/the-missing-semester-of-cs/"/>
+    
+    
+    <category term="linux" scheme="https://liyuelian.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>主题 2 Shell工具和脚本</title>
+    <link href="https://liyuelian.github.io/2023/01/12/00-15-22/"/>
+    <id>https://liyuelian.github.io/2023/01/12/00-15-22/</id>
+    <published>2023-01-11T16:15:22.000Z</published>
+    <updated>2023-01-12T16:21:37.719Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;主题-2-Shell工具和脚本&quot;&gt;&lt;a href=&quot;#主题-2-Shell工具和脚本&quot; class=&quot;headerlink&quot; title=&quot;主题 2 Shell工具和脚本&quot;&gt;&lt;/a&gt;主题 2 Shell工具和脚本&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://missing-semester-cn.github.io/2020/shell-tools/&quot;&gt;Shell 工具和脚本 · the missing semester of your cs education (missing-semester-cn.github.io)&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Shell脚本&quot;&gt;&lt;a href=&quot;#Shell脚本&quot; class=&quot;headerlink&quot; title=&quot;Shell脚本&quot;&gt;&lt;/a&gt;Shell脚本&lt;/h2&gt;&lt;p&gt;shell 脚本是一种更加复杂度的工具。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义变量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在bash中为变量赋值的语法是&lt;code&gt;foo=bar&lt;/code&gt;，意为定义变量foo，foo的值为bar。访问变量使用$变量名&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="the missing semester of cs" scheme="https://liyuelian.github.io/categories/the-missing-semester-of-cs/"/>
+    
+    
+    <category term="linux" scheme="https://liyuelian.github.io/tags/linux/"/>
+    
+  </entry>
+  
+</feed>
