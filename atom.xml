@@ -6,7 +6,7 @@
   <link href="https://liyuelian.github.io/atom.xml" rel="self"/>
   
   <link href="https://liyuelian.github.io/"/>
-  <updated>2023-01-12T16:21:57.625Z</updated>
+  <updated>2023-01-14T15:55:16.347Z</updated>
   <id>https://liyuelian.github.io/</id>
   
   <author>
@@ -15,6 +15,74 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://liyuelian.github.io/2023/01/14/23-56-00/"/>
+    <id>https://liyuelian.github.io/2023/01/14/23-56-00/</id>
+    <published>2023-01-14T15:56:00.606Z</published>
+    <updated>2023-01-14T15:55:16.347Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;主要&quot;&gt;&lt;a href=&quot;#主要&quot; class=&quot;headerlink&quot; title=&quot;主要&quot;&gt;&lt;/a&gt;主要&lt;/h1&gt;&lt;h2 id=&quot;基础篇&quot;&gt;&lt;a href=&quot;#基础篇&quot; class=&quot;headerlink&quot; title=&quot;基础篇&quot;&gt;&lt;/a&gt;基础篇&lt;/h2&gt;&lt;h3 id=&quot;Git-Branch&quot;&gt;&lt;a href=&quot;#Git-Branch&quot; class=&quot;headerlink&quot; title=&quot;Git Branch&quot;&gt;&lt;/a&gt;Git Branch&lt;/h3&gt;&lt;p&gt;Git 的分支也非常轻量。它们只是简单地指向某个提交纪录 —— 仅此而已。所以许多 Git 爱好者传颂：&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;早建分支！多用分支！&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;这是因为即使创建再多的分支也不会造成储存或内存上的开销，并且按逻辑分解工作到不同的分支要比维护那些特别臃肿的分支简单多了。&lt;/p&gt;
+&lt;p&gt;在将分支和提交记录结合起来后，我们会看到两者如何协作。现在只要记住使用分支其实就相当于在说：“我想基于这个提交以及它所有的父提交进行新的工作。”&lt;/p&gt;
+&lt;p&gt;咱们通过实际操作来看看分支是什么样子的。&lt;/p&gt;
+&lt;p&gt;接下来，我们将要创建一个到名为 &lt;code&gt;newImage&lt;/code&gt; 的分支。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20221222020812463.png&quot; alt=&quot;image-20221222020812463&quot; style=&quot;zoom:67%;&quot; /&gt; &lt;code&gt;git branch newImage&lt;/code&gt;&lt;img src=&quot;https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20221222020826638.png&quot; alt=&quot;image-20221222020826638&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;看到了吗，创建分支就是这么容易！新创建的分支 &lt;code&gt;newImage&lt;/code&gt; 指向的是提交记录 &lt;code&gt;C1&lt;/code&gt;。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://liyuelian.github.io/2023/01/14/23-56-00/"/>
+    <id>https://liyuelian.github.io/2023/01/14/23-56-00/</id>
+    <published>2023-01-14T15:56:00.603Z</published>
+    <updated>2023-01-14T15:55:03.420Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Git学习&quot;&gt;&lt;a href=&quot;#Git学习&quot; class=&quot;headerlink&quot; title=&quot;Git学习&quot;&gt;&lt;/a&gt;Git学习&lt;/h1&gt;&lt;h2 id=&quot;1-Git概述&quot;&gt;&lt;a href=&quot;#1-Git概述&quot; class=&quot;headerlink&quot; title=&quot;1.Git概述&quot;&gt;&lt;/a&gt;1.Git概述&lt;/h2&gt;&lt;p&gt;Git是一个免费的，开源的分布式版本控制系统，可以快速高效地处理从小型到大型的各种项目。&lt;/p&gt;
+&lt;p&gt;Git易于学习，占地面积小，性能极快。它具有廉价的本地库，方便的暂存区域和多个工作流分支等特性。其性能优于Subversion，CVS，Perforce和ClearCase等版本控制工具。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://liyuelian.github.io/2023/01/14/23-56-00/"/>
+    <id>https://liyuelian.github.io/2023/01/14/23-56-00/</id>
+    <published>2023-01-14T15:56:00.600Z</published>
+    <updated>2023-01-14T15:55:24.646Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;1-git和github是什么&quot;&gt;&lt;a href=&quot;#1-git和github是什么&quot; class=&quot;headerlink&quot; title=&quot;1.git和github是什么&quot;&gt;&lt;/a&gt;1.git和github是什么&lt;/h2&gt;&lt;p&gt;git是一个版本控制软件，而github是基于Git，用于托管Git上面的仓库的一个网站。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Git版本控制系统可以帮你保存文件的所有修改记录，并使用版本号进行区分。你可以随时浏览历史版本，将改错的文件还原到指定的版本，还可以对比不同的版本的文件差异，起到恢复和保护的作用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;GitHub是主流的代码托管平台，可以理解为一个存放和管理代码的网盘。大家可以把自己的代码传上去进行共享和维护，当然也可以从平台下载代码&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;注意，git是开源软件，任何人都可以使用没有风险，但github是运行git的商业托管服务，不是开源的，不要混淆&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;2-github基本使用&quot;&gt;&lt;a href=&quot;#2-github基本使用&quot; class=&quot;headerlink&quot; title=&quot;2.github基本使用&quot;&gt;&lt;/a&gt;2.github基本使用&lt;/h2&gt;&lt;h3 id=&quot;2-1创建Repository&quot;&gt;&lt;a href=&quot;#2-1创建Repository&quot; class=&quot;headerlink&quot; title=&quot;2.1创建Repository&quot;&gt;&lt;/a&gt;2.1创建Repository&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;github网址：&lt;a href=&quot;https://github.com/&quot;&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;注册登录账号，点击账号页面&lt;/p&gt;
+&lt;img src=&quot;https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20221130184900892.png&quot; alt=&quot;image-20221130184900892&quot; style=&quot;zoom:67%;&quot; /&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>hexo博客搭建记录</title>
