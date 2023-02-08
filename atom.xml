@@ -6,7 +6,7 @@
   <link href="https://liyuelian.github.io/atom.xml" rel="self"/>
   
   <link href="https://liyuelian.github.io/"/>
-  <updated>2023-01-14T15:55:16.347Z</updated>
+  <updated>2023-02-08T15:33:24.677Z</updated>
   <id>https://liyuelian.github.io/</id>
   
   <author>
@@ -17,70 +17,127 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="https://liyuelian.github.io/2023/01/14/23-56-00/"/>
-    <id>https://liyuelian.github.io/2023/01/14/23-56-00/</id>
-    <published>2023-01-14T15:56:00.606Z</published>
-    <updated>2023-01-14T15:55:16.347Z</updated>
+    <title>视图和视图解析器</title>
+    <link href="https://liyuelian.github.io/2023/02/08/23-33-40/"/>
+    <id>https://liyuelian.github.io/2023/02/08/23-33-40/</id>
+    <published>2023-02-08T15:33:40.000Z</published>
+    <updated>2023-02-08T15:33:24.677Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;主要&quot;&gt;&lt;a href=&quot;#主要&quot; class=&quot;headerlink&quot; title=&quot;主要&quot;&gt;&lt;/a&gt;主要&lt;/h1&gt;&lt;h2 id=&quot;基础篇&quot;&gt;&lt;a href=&quot;#基础篇&quot; class=&quot;headerlink&quot; title=&quot;基础篇&quot;&gt;&lt;/a&gt;基础篇&lt;/h2&gt;&lt;h3 id=&quot;Git-Branch&quot;&gt;&lt;a href=&quot;#Git-Branch&quot; class=&quot;headerlink&quot; title=&quot;Git Branch&quot;&gt;&lt;/a&gt;Git Branch&lt;/h3&gt;&lt;p&gt;Git 的分支也非常轻量。它们只是简单地指向某个提交纪录 —— 仅此而已。所以许多 Git 爱好者传颂：&lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;早建分支！多用分支！&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;这是因为即使创建再多的分支也不会造成储存或内存上的开销，并且按逻辑分解工作到不同的分支要比维护那些特别臃肿的分支简单多了。&lt;/p&gt;
-&lt;p&gt;在将分支和提交记录结合起来后，我们会看到两者如何协作。现在只要记住使用分支其实就相当于在说：“我想基于这个提交以及它所有的父提交进行新的工作。”&lt;/p&gt;
-&lt;p&gt;咱们通过实际操作来看看分支是什么样子的。&lt;/p&gt;
-&lt;p&gt;接下来，我们将要创建一个到名为 &lt;code&gt;newImage&lt;/code&gt; 的分支。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20221222020812463.png&quot; alt=&quot;image-20221222020812463&quot; style=&quot;zoom:67%;&quot; /&gt; &lt;code&gt;git branch newImage&lt;/code&gt;&lt;img src=&quot;https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20221222020826638.png&quot; alt=&quot;image-20221222020826638&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;看到了吗，创建分支就是这么容易！新创建的分支 &lt;code&gt;newImage&lt;/code&gt; 指向的是提交记录 &lt;code&gt;C1&lt;/code&gt;。&lt;/p&gt;</summary>
-    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;视图和视图解析器&quot;&gt;&lt;a href=&quot;#视图和视图解析器&quot; class=&quot;headerlink&quot; title=&quot;视图和视图解析器&quot;&gt;&lt;/a&gt;视图和视图解析器&lt;/h1&gt;&lt;h2 id=&quot;1-基本介绍&quot;&gt;&lt;a href=&quot;#1-基本介绍&quot;</summary>
+        
+      
     
     
     
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://liyuelian.github.io/2023/01/14/23-56-00/"/>
-    <id>https://liyuelian.github.io/2023/01/14/23-56-00/</id>
-    <published>2023-01-14T15:56:00.603Z</published>
-    <updated>2023-01-14T15:55:03.420Z</updated>
+    <category term="SpringMVC" scheme="https://liyuelian.github.io/categories/SpringMVC/"/>
     
     
-    <summary type="html">&lt;h1 id=&quot;Git学习&quot;&gt;&lt;a href=&quot;#Git学习&quot; class=&quot;headerlink&quot; title=&quot;Git学习&quot;&gt;&lt;/a&gt;Git学习&lt;/h1&gt;&lt;h2 id=&quot;1-Git概述&quot;&gt;&lt;a href=&quot;#1-Git概述&quot; class=&quot;headerlink&quot; title=&quot;1.Git概述&quot;&gt;&lt;/a&gt;1.Git概述&lt;/h2&gt;&lt;p&gt;Git是一个免费的，开源的分布式版本控制系统，可以快速高效地处理从小型到大型的各种项目。&lt;/p&gt;
-&lt;p&gt;Git易于学习，占地面积小，性能极快。它具有廉价的本地库，方便的暂存区域和多个工作流分支等特性。其性能优于Subversion，CVS，Perforce和ClearCase等版本控制工具。&lt;/p&gt;</summary>
-    
-    
-    
+    <category term="框架" scheme="https://liyuelian.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://liyuelian.github.io/2023/01/14/23-56-00/"/>
-    <id>https://liyuelian.github.io/2023/01/14/23-56-00/</id>
-    <published>2023-01-14T15:56:00.600Z</published>
-    <updated>2023-01-14T15:55:24.646Z</updated>
+    <title>模型数据</title>
+    <link href="https://liyuelian.github.io/2023/02/08/23-31-39/"/>
+    <id>https://liyuelian.github.io/2023/02/08/23-31-39/</id>
+    <published>2023-02-08T15:31:39.000Z</published>
+    <updated>2023-02-08T15:32:54.594Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;1-git和github是什么&quot;&gt;&lt;a href=&quot;#1-git和github是什么&quot; class=&quot;headerlink&quot; title=&quot;1.git和github是什么&quot;&gt;&lt;/a&gt;1.git和github是什么&lt;/h2&gt;&lt;p&gt;git是一个版本控制软件，而github是基于Git，用于托管Git上面的仓库的一个网站。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Git版本控制系统可以帮你保存文件的所有修改记录，并使用版本号进行区分。你可以随时浏览历史版本，将改错的文件还原到指定的版本，还可以对比不同的版本的文件差异，起到恢复和保护的作用。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;GitHub是主流的代码托管平台，可以理解为一个存放和管理代码的网盘。大家可以把自己的代码传上去进行共享和维护，当然也可以从平台下载代码&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;注意，git是开源软件，任何人都可以使用没有风险，但github是运行git的商业托管服务，不是开源的，不要混淆&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;2-github基本使用&quot;&gt;&lt;a href=&quot;#2-github基本使用&quot; class=&quot;headerlink&quot; title=&quot;2.github基本使用&quot;&gt;&lt;/a&gt;2.github基本使用&lt;/h2&gt;&lt;h3 id=&quot;2-1创建Repository&quot;&gt;&lt;a href=&quot;#2-1创建Repository&quot; class=&quot;headerlink&quot; title=&quot;2.1创建Repository&quot;&gt;&lt;/a&gt;2.1创建Repository&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;github网址：&lt;a href=&quot;https://github.com/&quot;&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;注册登录账号，点击账号页面&lt;/p&gt;
-&lt;img src=&quot;https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20221130184900892.png&quot; alt=&quot;image-20221130184900892&quot; style=&quot;zoom:67%;&quot; /&gt;</summary>
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;模型数据&quot;&gt;&lt;a href=&quot;#模型数据&quot; class=&quot;headerlink&quot; title=&quot;模型数据&quot;&gt;&lt;/a&gt;模型数据&lt;/h1&gt;&lt;h2 id=&quot;1-数据放入request&quot;&gt;&lt;a href=&quot;#1-数据放入request&quot;</summary>
+        
+      
     
     
     
+    <category term="SpringMVC" scheme="https://liyuelian.github.io/categories/SpringMVC/"/>
+    
+    
+    <category term="框架" scheme="https://liyuelian.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RequestMapping和Rest</title>
+    <link href="https://liyuelian.github.io/2023/02/08/23-31-38/"/>
+    <id>https://liyuelian.github.io/2023/02/08/23-31-38/</id>
+    <published>2023-02-08T15:31:38.000Z</published>
+    <updated>2023-02-08T15:48:31.978Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;RequestMapping和Rest&quot;&gt;&lt;a href=&quot;#RequestMapping和Rest&quot; class=&quot;headerlink&quot; title=&quot;RequestMapping和Rest&quot;&gt;&lt;/a&gt;RequestMapping和Rest&lt;/h1&gt;&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="SpringMVC" scheme="https://liyuelian.github.io/categories/SpringMVC/"/>
+    
+    
+    <category term="框架" scheme="https://liyuelian.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringMVC映射请求数据</title>
+    <link href="https://liyuelian.github.io/2023/02/08/23-31-38/"/>
+    <id>https://liyuelian.github.io/2023/02/08/23-31-38/</id>
+    <published>2023-02-08T15:31:38.000Z</published>
+    <updated>2023-02-08T15:32:25.669Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;SpringMVC映射请求数据&quot;&gt;&lt;a href=&quot;#SpringMVC映射请求数据&quot; class=&quot;headerlink&quot; title=&quot;SpringMVC映射请求数据&quot;&gt;&lt;/a&gt;SpringMVC映射请求数据&lt;/h1&gt;&lt;h2 id=&quot;1-获取参数值&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="SpringMVC" scheme="https://liyuelian.github.io/categories/SpringMVC/"/>
+    
+    
+    <category term="框架" scheme="https://liyuelian.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringMVC介绍</title>
+    <link href="https://liyuelian.github.io/2023/02/08/23-30-36/"/>
+    <id>https://liyuelian.github.io/2023/02/08/23-30-36/</id>
+    <published>2023-02-08T15:30:36.000Z</published>
+    <updated>2023-02-08T15:31:03.524Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;SpringMVC介绍&quot;&gt;&lt;a href=&quot;#SpringMVC介绍&quot; class=&quot;headerlink&quot; title=&quot;SpringMVC介绍&quot;&gt;&lt;/a&gt;SpringMVC介绍&lt;/h1&gt;&lt;h2 id=&quot;1-离线文档&quot;&gt;&lt;a href=&quot;#1-离线文档&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="SpringMVC" scheme="https://liyuelian.github.io/categories/SpringMVC/"/>
+    
+    
+    <category term="框架" scheme="https://liyuelian.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -89,14 +146,17 @@
     <link href="https://liyuelian.github.io/2023/01/12/22-36-04/"/>
     <id>https://liyuelian.github.io/2023/01/12/22-36-04/</id>
     <published>2023-01-12T14:36:04.000Z</published>
-    <updated>2023-01-12T16:21:57.625Z</updated>
+    <updated>2023-02-08T15:28:47.383Z</updated>
     
     
+      
+      
+        
+        
     <summary type="html">&lt;h1 id=&quot;Hexo博客搭建记录&quot;&gt;&lt;a href=&quot;#Hexo博客搭建记录&quot; class=&quot;headerlink&quot; title=&quot;Hexo博客搭建记录&quot;&gt;&lt;/a&gt;Hexo博客搭建记录&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;参考视频：&lt;a href=&quot;https://www.bilibili.com/video/av44544186/?vd_source=7e137c3a1559f85aacb1f151bb0a830d&quot;&gt;手把手教你从0开始搭建自己的个人博客 |无坑版视频教程&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;以下命令操作建议使用管理员权限完成&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;1-nodejs-amp-hexo-安装&quot;&gt;&lt;a href=&quot;#1-nodejs-amp-hexo-安装&quot; class=&quot;headerlink&quot; title=&quot;1. nodejs &amp;amp; hexo 安装&quot;&gt;&lt;/a&gt;1. nodejs &amp;amp; hexo 安装&lt;/h2&gt;&lt;p&gt;1.首先下载node.js，并安装（安装node时，会自动安装npm），安装完毕后在控制台输入&lt;code&gt;node -v&lt;/code&gt;，如果显示版本则说明安装成功。&lt;/p&gt;</summary>
+&lt;p&gt;参考视频：&lt;a</summary>
+        
+      
     
     
     
@@ -112,11 +172,16 @@
     <link href="https://liyuelian.github.io/2023/01/12/22-29-15/"/>
     <id>https://liyuelian.github.io/2023/01/12/22-29-15/</id>
     <published>2023-01-12T14:29:15.000Z</published>
-    <updated>2023-01-12T16:18:56.856Z</updated>
+    <updated>2023-02-08T15:28:42.622Z</updated>
     
     
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;</summary>
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
+        
+      
     
     
     
@@ -126,17 +191,20 @@
   </entry>
   
   <entry>
-    <title>主题 1 The Shell</title>
+    <title>主题 3 编辑器(Vim)</title>
     <link href="https://liyuelian.github.io/2023/01/12/00-15-22/"/>
     <id>https://liyuelian.github.io/2023/01/12/00-15-22/</id>
     <published>2023-01-11T16:15:22.000Z</published>
-    <updated>2023-01-12T16:21:30.782Z</updated>
+    <updated>2023-02-08T15:28:22.009Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;主题-1-The-Shell&quot;&gt;&lt;a href=&quot;#主题-1-The-Shell&quot; class=&quot;headerlink&quot; title=&quot;主题 1 The Shell&quot;&gt;&lt;/a&gt;主题 1 The Shell&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://missing-semester-cn.github.io/2020/course-shell/&quot;&gt;课程概览与 shell · the missing semester of your cs education (missing-semester-cn.github.io)&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Shell是什么？&quot;&gt;&lt;a href=&quot;#Shell是什么？&quot; class=&quot;headerlink&quot; title=&quot;Shell是什么？&quot;&gt;&lt;/a&gt;Shell是什么？&lt;/h2&gt;&lt;p&gt;一旦你想脱离可视化界面让你做的，然后做点别的事情，那么Shell将是你和计算机交互的最主要的方式之一。&lt;/p&gt;
-&lt;p&gt;可视化界面受限于，它只能做被设计出来的操作——比如你不能点击一个不存在的按钮或者是用语音输入一个还没有被录入的指令。这就是这门课介绍命令行工具和基于文本的工具的理由，shell则是你去做这些操作的地方。&lt;/p&gt;
-&lt;p&gt;在Windows和Linux可以找到成堆的终端（Terminal），这些是能显示Shell的文本窗口。其中普遍的是bash，或者叫Bourne Again Shell。由于bash的普遍性，这门课中将使用bash。&lt;/p&gt;</summary>
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;主题-3-编辑器-Vim&quot;&gt;&lt;a href=&quot;#主题-3-编辑器-Vim&quot; class=&quot;headerlink&quot; title=&quot;主题 3 编辑器(Vim)&quot;&gt;&lt;/a&gt;主题 3 编辑器(Vim)&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+        
+      
     
     
     
@@ -148,17 +216,20 @@
   </entry>
   
   <entry>
-    <title>主题 3 编辑器(Vim)</title>
+    <title>主题 1 The Shell</title>
     <link href="https://liyuelian.github.io/2023/01/12/00-15-22/"/>
     <id>https://liyuelian.github.io/2023/01/12/00-15-22/</id>
     <published>2023-01-11T16:15:22.000Z</published>
-    <updated>2023-01-12T16:21:45.174Z</updated>
+    <updated>2023-02-08T15:28:11.833Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;主题-3-编辑器-Vim&quot;&gt;&lt;a href=&quot;#主题-3-编辑器-Vim&quot; class=&quot;headerlink&quot; title=&quot;主题 3 编辑器(Vim)&quot;&gt;&lt;/a&gt;主题 3 编辑器(Vim)&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://missing-semester-cn.github.io/2020/editors/&quot;&gt;编辑器 (Vim) · the missing semester of your cs education (missing-semester-cn.github.io)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;代码编辑器和和其他的编辑器（比如用来写文章的编辑器）有一些不同。&lt;/p&gt;
-&lt;p&gt;这是因为写程序和写文章不同。当你写程序时，会花大量时间来阅读你写的东西，或者来移动光标，做一些小小的修改；而不是像写文章的时候，从上到下一气呵成。因此，对于不同的用途，我们会使用不同的编辑器，这是很合理的。&lt;/p&gt;
-&lt;h2 id=&quot;1-该学哪个编辑器&quot;&gt;&lt;a href=&quot;#1-该学哪个编辑器&quot; class=&quot;headerlink&quot; title=&quot;1.该学哪个编辑器?&quot;&gt;&lt;/a&gt;1.该学哪个编辑器?&lt;/h2&gt;</summary>
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;主题-1-The-Shell&quot;&gt;&lt;a href=&quot;#主题-1-The-Shell&quot; class=&quot;headerlink&quot; title=&quot;主题 1 The Shell&quot;&gt;&lt;/a&gt;主题 1 The Shell&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+        
+      
     
     
     
@@ -174,15 +245,16 @@
     <link href="https://liyuelian.github.io/2023/01/12/00-15-22/"/>
     <id>https://liyuelian.github.io/2023/01/12/00-15-22/</id>
     <published>2023-01-11T16:15:22.000Z</published>
-    <updated>2023-01-12T16:21:37.719Z</updated>
+    <updated>2023-02-08T15:28:16.950Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;主题-2-Shell工具和脚本&quot;&gt;&lt;a href=&quot;#主题-2-Shell工具和脚本&quot; class=&quot;headerlink&quot; title=&quot;主题 2 Shell工具和脚本&quot;&gt;&lt;/a&gt;主题 2 Shell工具和脚本&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://missing-semester-cn.github.io/2020/shell-tools/&quot;&gt;Shell 工具和脚本 · the missing semester of your cs education (missing-semester-cn.github.io)&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Shell脚本&quot;&gt;&lt;a href=&quot;#Shell脚本&quot; class=&quot;headerlink&quot; title=&quot;Shell脚本&quot;&gt;&lt;/a&gt;Shell脚本&lt;/h2&gt;&lt;p&gt;shell 脚本是一种更加复杂度的工具。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;定义变量&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;在bash中为变量赋值的语法是&lt;code&gt;foo=bar&lt;/code&gt;，意为定义变量foo，foo的值为bar。访问变量使用$变量名&lt;/p&gt;</summary>
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;主题-2-Shell工具和脚本&quot;&gt;&lt;a href=&quot;#主题-2-Shell工具和脚本&quot; class=&quot;headerlink&quot; title=&quot;主题 2 Shell工具和脚本&quot;&gt;&lt;/a&gt;主题 2 Shell工具和脚本&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+        
+      
     
     
     

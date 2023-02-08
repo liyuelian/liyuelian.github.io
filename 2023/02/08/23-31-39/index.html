@@ -1,0 +1,819 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liyuelian">
+  <meta name="keywords" content="java开发,代码,日常记录">
+  
+    <meta name="description" content="模型数据1.数据放入request 说明：开发中，控制器&#x2F;处理器中获取的数据如何放入request域，然后在前端（vue&#x2F;jsp&#x2F;…）取出显示？   先来看一个例子  应用实例需求：表单提交信息，后端获取信息，并通过request转发到另一个页面，显示信息。   需要知道的是：前端提交的数据，springmvc会自动地封装到java对象中，同时 springmvc 会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模型数据">
+<meta property="og:url" content="https://liyuelian.github.io/2023/02/08/23-31-39/index.html">
+<meta property="og:site_name" content="liyuelian&#39;blogs">
+<meta property="og:description" content="模型数据1.数据放入request 说明：开发中，控制器&#x2F;处理器中获取的数据如何放入request域，然后在前端（vue&#x2F;jsp&#x2F;…）取出显示？   先来看一个例子  应用实例需求：表单提交信息，后端获取信息，并通过request转发到另一个页面，显示信息。   需要知道的是：前端提交的数据，springmvc会自动地封装到java对象中，同时 springmvc 会">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181746223.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206184133385.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206184201411.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206190545490.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206190608418.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206191844823.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206191849974.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206200644063.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206200724038.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206202910589.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206203843271.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206203849600.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206205955916.png">
+<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206210025190.png">
+<meta property="article:published_time" content="2023-02-08T15:31:39.000Z">
+<meta property="article:modified_time" content="2023-02-08T15:32:54.594Z">
+<meta property="article:author" content="liyuelian">
+<meta property="article:tag" content="框架">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png">
+  
+  
+  
+  <title>模型数据 - liyuelian&#39;blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"liyuelian.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="liyuelian'blogs" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>liyuelian&#39;blogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="模型数据"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-08 23:31" pubdate>
+          2023年2月8日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          42 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">模型数据</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="模型数据"><a href="#模型数据" class="headerlink" title="模型数据"></a>模型数据</h1><h2 id="1-数据放入request"><a href="#1-数据放入request" class="headerlink" title="1.数据放入request"></a>1.数据放入request</h2><ul>
+<li>说明：开发中，控制器&#x2F;处理器中获取的数据如何放入request域，然后在前端（vue&#x2F;jsp&#x2F;…）取出显示？</li>
+</ul>
+<blockquote>
+<p>先来看一个例子</p>
+</blockquote>
+<p>应用实例需求：表单提交信息，后端获取信息，并通过request转发到另一个页面，显示信息。</p>
+<p><img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png" srcset="/img/loading.gif" lazyload alt="image-20230206181733509" style="zoom:70%;" /> <img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181746223.png" srcset="/img/loading.gif" lazyload alt="image-20230206181746223" style="zoom:67%;" /></p>
+<p><strong>需要知道的是：前端提交的数据，springmvc会自动地封装到java对象中，同时 springmvc 会自动地将其放入request 域中，这样我们就可以在跳转的下一个页面取出数据。</strong></p>
+<hr>
+<ol>
+<li><p>mode_date.jsp提交数据：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;model_data&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;form action=<span class="hljs-string">&quot;vote/vote05&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span>&gt;<br>  主人id：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;id&quot;</span>/&gt;&lt;br/&gt;<br>  主人名：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;name&quot;</span>/&gt;&lt;br/&gt;<br>  宠物id：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;pet.id&quot;</span>/&gt;&lt;br/&gt;<br>  宠物名：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;pet.name&quot;</span>/&gt;&lt;br/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;添加主人和宠物&quot;</span>/&gt;&lt;br/&gt;<br>&lt;/form&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>VoteHandler.java：</p>
+<p>springmvc会自动将数据封装到Javabean中，并将获取的model模型放入到request域中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.li.web.requestparam;<br><br><span class="hljs-keyword">import</span> com.li.entity.Master;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Controller;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> 李</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@RequestMapping(value = &quot;/vote&quot;)</span><br><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">VoteHandler</span> &#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 1.提交的数据-&gt;springmvc会自动地封装到 java对象</span><br><span class="hljs-comment">     * -&gt;同时 springmvc 会自动地将其放入request域中</span><br><span class="hljs-comment">     * 2.这样就可以在跳转的下一个页面取出数据</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@RequestMapping(value = &quot;/vote05&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">test05</span><span class="hljs-params">(Master master)</span> &#123;<br>        <span class="hljs-comment">//springmvc会自动的把获取的model模型放入request域中，名字就是 master</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>转发的页面 vote_ok.jsp：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;vote_ok&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;取出request域中的信息&lt;/h1&gt;<br>主人的id=$&#123;requestScope.master.id&#125;<br>主人的名字=$&#123;requestScope.master.name&#125;<br>宠物的id=$&#123;requestScope.master.pet.id&#125;<br>宠物的名字=$&#123;requestScope.master.pet.name&#125;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>访问mode_date.jsp，提交数据：</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206184133385.png" srcset="/img/loading.gif" lazyload alt="image-20230206184133385" style="zoom:50%;" />
+
+<p>转发页面vote_ok.jsp成功地拿到了request域中的信息：</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206184201411.png" srcset="/img/loading.gif" lazyload alt="image-20230206184201411" style="zoom: 60%;" />
+
+<hr>
+<p><strong>从上述代码中可以看出springmvc会自动将获取的model数据添加到request域中。同时我们也可以手动添加修改数据，并放入到request域中，有如下三种方式：</strong></p>
+<h3 id="1-1方式1-通过HttpServletRequest放入request域"><a href="#1-1方式1-通过HttpServletRequest放入request域" class="headerlink" title="1.1方式1-通过HttpServletRequest放入request域"></a>1.1方式1-通过HttpServletRequest放入request域</h3><ol>
+<li><p>这种方式就是原生的javaweb方式，可以在request域中以k-v形式，直接放入普通字符串，也可以放入对象</p>
+</li>
+<li><p>同时springmvc 自动放入request域的model也可以被修改</p>
+</li>
+<li><p>注意：springmvc放入request域中的对象的key值，是按照对象的类型（首字母小写）存放的，和方法的形参名无关</p>
+</li>
+</ol>
+<p>修改VoteHandler.java：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(value = &quot;/vote05&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">test05</span><span class="hljs-params">(Master master100, HttpServletRequest request)</span> &#123;<br>    <span class="hljs-comment">//1.springmvc会自动的把获取的model模型放入request域中，名字就是 master</span><br>    <span class="hljs-comment">//2.也可以手动添加数据到request域中</span><br>    request.setAttribute(<span class="hljs-string">&quot;address&quot;</span>, <span class="hljs-string">&quot;beijing&quot;</span>);<br>    <span class="hljs-comment">//3.同时可以修改 master的属性值</span><br>    master100.setName(<span class="hljs-string">&quot;hahahah&quot;</span>);<br>    <span class="hljs-comment">//4.分析一下springmvc默认存放对象到request域中，属性名是如何确定的？</span><br>    <span class="hljs-comment">//  是按对象的类型（首字母小写）放入的，和方法的形参名无关</span><br>    <span class="hljs-comment">//  因此我们在转发的页面按照该名称是可以拿出来的</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>mode_date.jsp不变，vote_ok.jsp添加address获取。</p>
+<p>提交数据：</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206190545490.png" srcset="/img/loading.gif" lazyload alt="image-20230206190545490" style="zoom:67%;" />
+
+<p>转发页面获取的数据：</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206190608418.png" srcset="/img/loading.gif" lazyload alt="image-20230206190608418" style="zoom: 50%;" />
+
+<h3 id="1-2方式2-通过请求的方法参数Map-lt-String-Object-gt-放入request域"><a href="#1-2方式2-通过请求的方法参数Map-lt-String-Object-gt-放入request域" class="headerlink" title="1.2方式2-通过请求的方法参数Map&lt;String,Object&gt;放入request域"></a>1.2方式2-通过请求的方法参数Map&lt;String,Object&gt;放入request域</h3><p><strong>springmvc会遍历map，将map中的k-v存放到request域中。因此你会发现在转发页面中，直接通过${requestScope.key}也可以获取属性的数据。</strong></p>
+<p>修改VoteHandler.java：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 演示通过Map&lt;String,Object&gt;设置数据到request域</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@RequestMapping(value = &quot;/vote06&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">test06</span><span class="hljs-params">(Master master, Map&lt;String, Object&gt; map)</span> &#123;<br>    <span class="hljs-comment">//需求是通过map对象，添加属性到request域中</span><br>    map.put(<span class="hljs-string">&quot;address&quot;</span>, <span class="hljs-string">&quot;tianjin&quot;</span>);<br>    <span class="hljs-comment">//原理分析：springmvc会遍历map，将map中的k-v存放到request域中</span><br>    <span class="hljs-comment">//因此你会发现在转发页面中，直接通过$&#123;requestScope.address&#125;也可以获取address的数据</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>model_data.jsp不变</p>
+<p>vote_ok.jsp：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;vote_ok&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;取出request域中的信息&lt;/h1&gt;<br>主人的address=$&#123;requestScope.address&#125;<br>主人的id=$&#123;requestScope.master.id&#125;<br>主人的名字=$&#123;requestScope.master.name&#125;<br>宠物的id=$&#123;requestScope.master.pet.id&#125;<br>宠物的名字=$&#123;requestScope.master.pet.name&#125;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+
+<p>model_data.jsp：</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206191844823.png" srcset="/img/loading.gif" lazyload alt="image-20230206191844823" style="zoom:60%;" />
+
+<p>vote_ok.jsp：</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206191849974.png" srcset="/img/loading.gif" lazyload alt="image-20230206191849974" style="zoom: 50%;" />
+
+<p><strong>注意事项：</strong></p>
+<ol>
+<li><p>我们知道，表单提交的数据会被springmvc自动封装成对象，并放入request域中。而且springmvc会扫描map，将里面的k-v也放到request域中。</p>
+</li>
+<li><p>这意味着，如果map的中某个key和之前自动封装的对象同名，那么在springmvc扫描map的时候，原先的request的对象的属性值会被map中同名key的value值<strong>覆盖</strong>。</p>
+</li>
+</ol>
+<h3 id="1-3方式3-通过返回ModelAndView对象实现request域数据"><a href="#1-3方式3-通过返回ModelAndView对象实现request域数据" class="headerlink" title="1.3方式3-通过返回ModelAndView对象实现request域数据"></a>1.3方式3-通过返回ModelAndView对象实现request域数据</h3><ol>
+<li>表单数据被springmvc封装到master对象</li>
+<li>master对象被springmvc封装到request域中</li>
+<li><strong>ModelAndView的属性也会被springmvc放入到request域中</strong></li>
+<li>因此转发的页面中可以通过request域获取到所有数据</li>
+</ol>
+<p>修改 VoteHandler.java：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//演示通过返回ModelAndView对象，将数据放入到request域中</span><br><span class="hljs-meta">@RequestMapping(value = &quot;/vote07&quot;)</span><br><span class="hljs-keyword">public</span> ModelAndView <span class="hljs-title function_">test07</span><span class="hljs-params">(Master master)</span> &#123;<br>    <span class="hljs-type">ModelAndView</span> <span class="hljs-variable">modelAndView</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ModelAndView</span>();<br>    <span class="hljs-comment">//放入属性到 ModelAndView对象</span><br>    modelAndView.addObject(<span class="hljs-string">&quot;address&quot;</span>, <span class="hljs-string">&quot;shanghai~~&quot;</span>);<br>    <span class="hljs-comment">//指定要跳转的视图名称</span><br>    modelAndView.setViewName(<span class="hljs-string">&quot;vote_ok&quot;</span>);<br>    <span class="hljs-keyword">return</span> modelAndView;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>model_data.jsp不变</p>
+<p>vote_ok.jsp：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;vote_ok&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;取出request域中的信息&lt;/h1&gt;<br>主人的address=$&#123;requestScope.address&#125;<br>主人的id=$&#123;requestScope.master.id&#125;<br>主人的名字=$&#123;requestScope.master.name&#125;<br>宠物的id=$&#123;requestScope.master.pet.id&#125;<br>宠物的名字=$&#123;requestScope.master.pet.name&#125;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+
+<p>model_data.jsp：</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206200644063.png" srcset="/img/loading.gif" lazyload alt="image-20230206200644063" style="zoom:60%;" />
+
+<p>vote_ok.jsp：可以看到在ModelAndView中的数据已经被放入到了request对象中，因此可以直接获取</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206200724038.png" srcset="/img/loading.gif" lazyload alt="image-20230206200724038" style="zoom:60%;" />
+
+<p><strong>注意事项：</strong></p>
+<ol>
+<li><p>从本质上看，请求响应的方return “xxx”，只是返回了一个字符串，其实本质上底层是返回了一个ModelAndView 对象，只是默认被封装起来了。</p>
+</li>
+<li><p>ModelAndView 既可以包含 model 数据，也可以包含视图信息。</p>
+</li>
+<li><p>ModelAndView 对象的 addObject 方法可以添加key-val数据，添加的数据默认被 springmvc 扫描放在request域中。</p>
+</li>
+<li><p>ModelAndView 对象的 setView 方法可以指定视图名称。</p>
+</li>
+<li><p>这里ModelAndView 被 springmvc 扫描，将属性放入request域中的操作，和之前map被springmvc扫描非常相似。同样的，ModelAndView中的属性被放入request域中时，如果request域中已经有同名属性了，那么将会进行覆盖操作。</p>
+</li>
+</ol>
+<h2 id="2-数据放入session"><a href="#2-数据放入session" class="headerlink" title="2.数据放入session"></a>2.数据放入session</h2><ul>
+<li>说明：开发中，控制器&#x2F;处理器中获取的数据如何放入session域，然后在前端（vue&#x2F;jsp&#x2F;…）取出显示？</li>
+</ul>
+<blockquote>
+<p>应用实例</p>
+</blockquote>
+<p>仍然以之前的例子说明：</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png" srcset="/img/loading.gif" lazyload alt="image-20230206181733509" style="zoom:70%;" />
+
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206202910589.png" srcset="/img/loading.gif" lazyload alt="image-20230206202910589" style="zoom:67%;" />
+
+<ol>
+<li><p>model_date.jsp</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;model_data&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;添加信息[测试session]&lt;/h1&gt;<br>&lt;form action=<span class="hljs-string">&quot;vote/vote08&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span>&gt;<br>  主人id：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;id&quot;</span>/&gt;&lt;br/&gt;<br>  主人名：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;name&quot;</span>/&gt;&lt;br/&gt;<br>  宠物id：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;pet.id&quot;</span>/&gt;&lt;br/&gt;<br>  宠物名：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;pet.name&quot;</span>/&gt;&lt;br/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;添加主人和宠物&quot;</span>/&gt;&lt;br/&gt;<br>&lt;/form&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>修改VoteHandler.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//演示如何将数据设置到session域中</span><br><span class="hljs-meta">@RequestMapping(value = &quot;/vote08&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">test08</span><span class="hljs-params">(Master master,HttpSession session)</span> &#123;<br>    <span class="hljs-comment">//master对象默认放在request域中</span><br>    <span class="hljs-comment">//因此要手动将数据放入session中</span><br>    session.setAttribute(<span class="hljs-string">&quot;master&quot;</span>,master);<br>    session.setAttribute(<span class="hljs-string">&quot;address&quot;</span>,<span class="hljs-string">&quot;guangzhou&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>vote_ok.jsp：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;vote_ok&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;取出session域中的信息&lt;/h1&gt;<br>主人的address=$&#123;sessionScope.address&#125;&lt;br/&gt;<br>主人的id=$&#123;sessionScope.master.id&#125;&lt;br/&gt;<br>主人的名字=$&#123;sessionScope.master.name&#125;&lt;br/&gt;<br>宠物的id=$&#123;sessionScope.master.pet.id&#125;&lt;br/&gt;<br>宠物的名字=$&#123;sessionScope.master.pet.name&#125;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>model_data.jsp：</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206203843271.png" srcset="/img/loading.gif" lazyload alt="image-20230206203843271" style="zoom:60%;" />
+
+<p>vote_ok.jsp：</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206203849600.png" srcset="/img/loading.gif" lazyload alt="image-20230206203849600" style="zoom:60%;" />
+
+
+
+<h2 id="3-ModelAttribute实现prepare方法"><a href="#3-ModelAttribute实现prepare方法" class="headerlink" title="3.@ModelAttribute实现prepare方法"></a>3.@ModelAttribute实现prepare方法</h2><h3 id="3-1基本说明"><a href="#3-1基本说明" class="headerlink" title="3.1基本说明"></a>3.1基本说明</h3><p>开发中，有时需要使用某个前置方法（如prepareXXX，名称随意）给目标方法准备一个模型对象</p>
+<ol>
+<li>@ModelAttribute 注解可以实现这样的需求</li>
+<li>在某个方法上添加了@ModelAttribute注解后，这个方法就是前置方法。在调用该Handler的任何一个方法时，都会先调用这个前置方法。</li>
+</ol>
+<blockquote>
+<p>应用实例</p>
+</blockquote>
+<ol>
+<li><p>修改VoteHandler.java，增加方法，并测试。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(value = &quot;/vote09&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">test09</span><span class="hljs-params">()</span> &#123;<br>    System.out.println(<span class="hljs-string">&quot;test09被调用...&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>&#125;<br><br><span class="hljs-meta">@RequestMapping(value = &quot;/vote10&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">test10</span><span class="hljs-params">()</span> &#123;<br>    System.out.println(<span class="hljs-string">&quot;test10被调用...&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 1.当 Handler的一个方法被 <span class="hljs-doctag">@ModelAttribute</span> 修饰时，这个方法就是前置方法</span><br><span class="hljs-comment"> * 2.该 Handler中的其他方法被调用时，都会先调用这个前置方法</span><br><span class="hljs-comment"> * 3.类似spring的aop的前置通知</span><br><span class="hljs-comment"> * 4.前置方法会切入到其他方法前执行[底层还是aop机制]</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@ModelAttribute</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">prepareModel</span><span class="hljs-params">()</span> &#123;<br>    System.out.println(<span class="hljs-string">&quot;prepareModel()---完成准备工作&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>分别在浏览器中方法test09，test10方法</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206205955916.png" srcset="/img/loading.gif" lazyload alt="image-20230206205955916" style="zoom:67%;" />
+</li>
+<li><p>后台输出：可以看到每次目标方法被访问前，都会调用前置方法prepareModel()</p>
+<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206210025190.png" srcset="/img/loading.gif" lazyload alt="image-20230206210025190" style="zoom:67%;" /></li>
+</ol>
+<h3 id="3-2-ModelAttribute的最佳实践"><a href="#3-2-ModelAttribute的最佳实践" class="headerlink" title="3.2@ModelAttribute的最佳实践"></a>3.2@ModelAttribute的最佳实践</h3><ul>
+<li>修改用户信息（就是这种机制的经典应用），流程如下：<ol>
+<li>在修改前，在前置方法中从数据库查出这个用户的数据</li>
+<li>在修改方法（目标方法）中，可以使用前置方法的（从数据库查出的）用户数据</li>
+<li>如果表单中对用户的某个属性修改了，则以新的数据为准。如果没有修改或不能修改，就以前置方法查出的用户数据为准，就保持原来的值。</li>
+</ol>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SpringMVC/" class="category-chain-item">SpringMVC</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%A1%86%E6%9E%B6/">#框架</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>模型数据</div>
+      <div>https://liyuelian.github.io/2023/02/08/23-31-39/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>liyuelian</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年2月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/08/23-33-40/" title="视图和视图解析器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">视图和视图解析器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/08/23-31-38/" title="RequestMapping和Rest">
+                        <span class="hidden-mobile">RequestMapping和Rest</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
