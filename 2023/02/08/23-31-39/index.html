@@ -1,323 +1,213 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="liyuelian">
-  <meta name="keywords" content="java开发,代码,日常记录">
-  
-    <meta name="description" content="模型数据1.数据放入request 说明：开发中，控制器&#x2F;处理器中获取的数据如何放入request域，然后在前端（vue&#x2F;jsp&#x2F;…）取出显示？   先来看一个例子  应用实例需求：表单提交信息，后端获取信息，并通过request转发到另一个页面，显示信息。   需要知道的是：前端提交的数据，springmvc会自动地封装到java对象中，同时 springmvc 会">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>模型数据 | liyuelian</title><meta name="author" content="liyuelian"><meta name="copyright" content="liyuelian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="模型数据1.数据放入request 说明：开发中，控制器&#x2F;处理器中获取的数据如何放入request域，然后在前端（vue&#x2F;jsp&#x2F;…）取出显示？   先来看一个例子  应用实例需求：表单提交信息，后端获取信息，并通过request转发到另一个页面，显示信息。   需要知道的是：前端提交的数据，springmvc会自动地封装到java对象中，同时 springmvc 会">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模型数据">
 <meta property="og:url" content="https://liyuelian.github.io/2023/02/08/23-31-39/index.html">
-<meta property="og:site_name" content="liyuelian&#39;blogs">
+<meta property="og:site_name" content="liyuelian">
 <meta property="og:description" content="模型数据1.数据放入request 说明：开发中，控制器&#x2F;处理器中获取的数据如何放入request域，然后在前端（vue&#x2F;jsp&#x2F;…）取出显示？   先来看一个例子  应用实例需求：表单提交信息，后端获取信息，并通过request转发到另一个页面，显示信息。   需要知道的是：前端提交的数据，springmvc会自动地封装到java对象中，同时 springmvc 会">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181746223.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206184133385.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206184201411.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206190545490.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206190608418.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206191844823.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206191849974.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206200644063.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206200724038.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206202910589.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206203843271.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206203849600.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206205955916.png">
-<meta property="og:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206210025190.png">
+<meta property="og:image" content="https://liyuelian.github.io/img/4.jpg">
 <meta property="article:published_time" content="2023-02-08T15:31:39.000Z">
 <meta property="article:modified_time" content="2023-02-08T15:32:54.594Z">
 <meta property="article:author" content="liyuelian">
 <meta property="article:tag" content="框架">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png">
-  
-  
-  
-  <title>模型数据 - liyuelian&#39;blogs</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"liyuelian.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://liyuelian.github.io/img/4.jpg"><link rel="shortcut icon" href="/img/weblogo.jpg"><link rel="canonical" href="https://liyuelian.github.io/2023/02/08/23-31-39/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":230},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: liyuelian","link":"链接: ","source":"来源: liyuelian","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-rigth"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
     }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '模型数据',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-08 23:32:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-
-
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="liyuelian'blogs" type="application/atom+xml">
-</head>
-
-
-<body>
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
   
-
-  <header>
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>liyuelian&#39;blogs</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="模型数据"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-08 23:31" pubdate>
-          2023年2月8日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          8.2k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          42 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">模型数据</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h1 id="模型数据"><a href="#模型数据" class="headerlink" title="模型数据"></a>模型数据</h1><h2 id="1-数据放入request"><a href="#1-数据放入request" class="headerlink" title="1.数据放入request"></a>1.数据放入request</h2><ul>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="liyuelian" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/weblogo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/4.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="liyuelian"><span class="site-name">liyuelian</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">模型数据</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2023-02-08T15:31:39.000Z" title="发表于 2023-02-08 23:31:39">2023-02-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/SpringMVC/">SpringMVC</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="模型数据"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="模型数据"><a href="#模型数据" class="headerlink" title="模型数据"></a>模型数据</h1><h2 id="1-数据放入request"><a href="#1-数据放入request" class="headerlink" title="1.数据放入request"></a>1.数据放入request</h2><ul>
 <li>说明：开发中，控制器&#x2F;处理器中获取的数据如何放入request域，然后在前端（vue&#x2F;jsp&#x2F;…）取出显示？</li>
 </ul>
 <blockquote>
 <p>先来看一个例子</p>
 </blockquote>
 <p>应用实例需求：表单提交信息，后端获取信息，并通过request转发到另一个页面，显示信息。</p>
-<p><img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png" srcset="/img/loading.gif" lazyload alt="image-20230206181733509" style="zoom:70%;" /> <img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181746223.png" srcset="/img/loading.gif" lazyload alt="image-20230206181746223" style="zoom:67%;" /></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png" alt="image-20230206181733509" style="zoom:70%;" /> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181746223.png" alt="image-20230206181746223" style="zoom:67%;" /></p>
 <p><strong>需要知道的是：前端提交的数据，springmvc会自动地封装到java对象中，同时 springmvc 会自动地将其放入request 域中，这样我们就可以在跳转的下一个页面取出数据。</strong></p>
 <hr>
 <ol>
 <li><p>mode_date.jsp提交数据：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;model_data&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;form action=<span class="hljs-string">&quot;vote/vote05&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span>&gt;<br>  主人id：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;id&quot;</span>/&gt;&lt;br/&gt;<br>  主人名：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;name&quot;</span>/&gt;&lt;br/&gt;<br>  宠物id：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;pet.id&quot;</span>/&gt;&lt;br/&gt;<br>  宠物名：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;pet.name&quot;</span>/&gt;&lt;br/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;添加主人和宠物&quot;</span>/&gt;&lt;br/&gt;<br>&lt;/form&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;model_data&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;vote/vote05&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">  主人id：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;id&quot;</span>/&gt;&lt;br/&gt;</span><br><span class="line">  主人名：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span>/&gt;&lt;br/&gt;</span><br><span class="line">  宠物id：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;pet.id&quot;</span>/&gt;&lt;br/&gt;</span><br><span class="line">  宠物名：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;pet.name&quot;</span>/&gt;&lt;br/&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;添加主人和宠物&quot;</span>/&gt;&lt;br/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>VoteHandler.java：</p>
 <p>springmvc会自动将数据封装到Javabean中，并将获取的model模型放入到request域中。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.li.web.requestparam;<br><br><span class="hljs-keyword">import</span> com.li.entity.Master;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Controller;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> 李</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@RequestMapping(value = &quot;/vote&quot;)</span><br><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">VoteHandler</span> &#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 1.提交的数据-&gt;springmvc会自动地封装到 java对象</span><br><span class="hljs-comment">     * -&gt;同时 springmvc 会自动地将其放入request域中</span><br><span class="hljs-comment">     * 2.这样就可以在跳转的下一个页面取出数据</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@RequestMapping(value = &quot;/vote05&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">test05</span><span class="hljs-params">(Master master)</span> &#123;<br>        <span class="hljs-comment">//springmvc会自动的把获取的model模型放入request域中，名字就是 master</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.li.web.requestparam;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.li.entity.Master;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 李</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;/vote&quot;)</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">VoteHandler</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 1.提交的数据-&gt;springmvc会自动地封装到 java对象</span></span><br><span class="line"><span class="comment">     * -&gt;同时 springmvc 会自动地将其放入request域中</span></span><br><span class="line"><span class="comment">     * 2.这样就可以在跳转的下一个页面取出数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/vote05&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">test05</span><span class="params">(Master master)</span> &#123;</span><br><span class="line">        <span class="comment">//springmvc会自动的把获取的model模型放入request域中，名字就是 master</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;vote_ok&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>转发的页面 vote_ok.jsp：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;vote_ok&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;取出request域中的信息&lt;/h1&gt;<br>主人的id=$&#123;requestScope.master.id&#125;<br>主人的名字=$&#123;requestScope.master.name&#125;<br>宠物的id=$&#123;requestScope.master.pet.id&#125;<br>宠物的名字=$&#123;requestScope.master.pet.name&#125;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;vote_ok&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;取出request域中的信息&lt;/h1&gt;</span><br><span class="line">主人的id=$&#123;requestScope.master.id&#125;</span><br><span class="line">主人的名字=$&#123;requestScope.master.name&#125;</span><br><span class="line">宠物的id=$&#123;requestScope.master.pet.id&#125;</span><br><span class="line">宠物的名字=$&#123;requestScope.master.pet.name&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>访问mode_date.jsp，提交数据：</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206184133385.png" srcset="/img/loading.gif" lazyload alt="image-20230206184133385" style="zoom:50%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206184133385.png" alt="image-20230206184133385" style="zoom:50%;" />
 
 <p>转发页面vote_ok.jsp成功地拿到了request域中的信息：</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206184201411.png" srcset="/img/loading.gif" lazyload alt="image-20230206184201411" style="zoom: 60%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206184201411.png" alt="image-20230206184201411" style="zoom: 60%;" />
 
 <hr>
 <p><strong>从上述代码中可以看出springmvc会自动将获取的model数据添加到request域中。同时我们也可以手动添加修改数据，并放入到request域中，有如下三种方式：</strong></p>
@@ -330,28 +220,28 @@
 </li>
 </ol>
 <p>修改VoteHandler.java：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(value = &quot;/vote05&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">test05</span><span class="hljs-params">(Master master100, HttpServletRequest request)</span> &#123;<br>    <span class="hljs-comment">//1.springmvc会自动的把获取的model模型放入request域中，名字就是 master</span><br>    <span class="hljs-comment">//2.也可以手动添加数据到request域中</span><br>    request.setAttribute(<span class="hljs-string">&quot;address&quot;</span>, <span class="hljs-string">&quot;beijing&quot;</span>);<br>    <span class="hljs-comment">//3.同时可以修改 master的属性值</span><br>    master100.setName(<span class="hljs-string">&quot;hahahah&quot;</span>);<br>    <span class="hljs-comment">//4.分析一下springmvc默认存放对象到request域中，属性名是如何确定的？</span><br>    <span class="hljs-comment">//  是按对象的类型（首字母小写）放入的，和方法的形参名无关</span><br>    <span class="hljs-comment">//  因此我们在转发的页面按照该名称是可以拿出来的</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;/vote05&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">test05</span><span class="params">(Master master100, HttpServletRequest request)</span> &#123;</span><br><span class="line">    <span class="comment">//1.springmvc会自动的把获取的model模型放入request域中，名字就是 master</span></span><br><span class="line">    <span class="comment">//2.也可以手动添加数据到request域中</span></span><br><span class="line">    request.setAttribute(<span class="string">&quot;address&quot;</span>, <span class="string">&quot;beijing&quot;</span>);</span><br><span class="line">    <span class="comment">//3.同时可以修改 master的属性值</span></span><br><span class="line">    master100.setName(<span class="string">&quot;hahahah&quot;</span>);</span><br><span class="line">    <span class="comment">//4.分析一下springmvc默认存放对象到request域中，属性名是如何确定的？</span></span><br><span class="line">    <span class="comment">//  是按对象的类型（首字母小写）放入的，和方法的形参名无关</span></span><br><span class="line">    <span class="comment">//  因此我们在转发的页面按照该名称是可以拿出来的</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;vote_ok&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>mode_date.jsp不变，vote_ok.jsp添加address获取。</p>
 <p>提交数据：</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206190545490.png" srcset="/img/loading.gif" lazyload alt="image-20230206190545490" style="zoom:67%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206190545490.png" alt="image-20230206190545490" style="zoom:67%;" />
 
 <p>转发页面获取的数据：</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206190608418.png" srcset="/img/loading.gif" lazyload alt="image-20230206190608418" style="zoom: 50%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206190608418.png" alt="image-20230206190608418" style="zoom: 50%;" />
 
 <h3 id="1-2方式2-通过请求的方法参数Map-lt-String-Object-gt-放入request域"><a href="#1-2方式2-通过请求的方法参数Map-lt-String-Object-gt-放入request域" class="headerlink" title="1.2方式2-通过请求的方法参数Map&lt;String,Object&gt;放入request域"></a>1.2方式2-通过请求的方法参数Map&lt;String,Object&gt;放入request域</h3><p><strong>springmvc会遍历map，将map中的k-v存放到request域中。因此你会发现在转发页面中，直接通过${requestScope.key}也可以获取属性的数据。</strong></p>
 <p>修改VoteHandler.java：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 演示通过Map&lt;String,Object&gt;设置数据到request域</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@RequestMapping(value = &quot;/vote06&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">test06</span><span class="hljs-params">(Master master, Map&lt;String, Object&gt; map)</span> &#123;<br>    <span class="hljs-comment">//需求是通过map对象，添加属性到request域中</span><br>    map.put(<span class="hljs-string">&quot;address&quot;</span>, <span class="hljs-string">&quot;tianjin&quot;</span>);<br>    <span class="hljs-comment">//原理分析：springmvc会遍历map，将map中的k-v存放到request域中</span><br>    <span class="hljs-comment">//因此你会发现在转发页面中，直接通过$&#123;requestScope.address&#125;也可以获取address的数据</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 演示通过Map&lt;String,Object&gt;设置数据到request域</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;/vote06&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">test06</span><span class="params">(Master master, Map&lt;String, Object&gt; map)</span> &#123;</span><br><span class="line">    <span class="comment">//需求是通过map对象，添加属性到request域中</span></span><br><span class="line">    map.put(<span class="string">&quot;address&quot;</span>, <span class="string">&quot;tianjin&quot;</span>);</span><br><span class="line">    <span class="comment">//原理分析：springmvc会遍历map，将map中的k-v存放到request域中</span></span><br><span class="line">    <span class="comment">//因此你会发现在转发页面中，直接通过$&#123;requestScope.address&#125;也可以获取address的数据</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;vote_ok&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>model_data.jsp不变</p>
 <p>vote_ok.jsp：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;vote_ok&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;取出request域中的信息&lt;/h1&gt;<br>主人的address=$&#123;requestScope.address&#125;<br>主人的id=$&#123;requestScope.master.id&#125;<br>主人的名字=$&#123;requestScope.master.name&#125;<br>宠物的id=$&#123;requestScope.master.pet.id&#125;<br>宠物的名字=$&#123;requestScope.master.pet.name&#125;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;vote_ok&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;取出request域中的信息&lt;/h1&gt;</span><br><span class="line">主人的address=$&#123;requestScope.address&#125;</span><br><span class="line">主人的id=$&#123;requestScope.master.id&#125;</span><br><span class="line">主人的名字=$&#123;requestScope.master.name&#125;</span><br><span class="line">宠物的id=$&#123;requestScope.master.pet.id&#125;</span><br><span class="line">宠物的名字=$&#123;requestScope.master.pet.name&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 
 <p>model_data.jsp：</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206191844823.png" srcset="/img/loading.gif" lazyload alt="image-20230206191844823" style="zoom:60%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206191844823.png" alt="image-20230206191844823" style="zoom:60%;" />
 
 <p>vote_ok.jsp：</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206191849974.png" srcset="/img/loading.gif" lazyload alt="image-20230206191849974" style="zoom: 50%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206191849974.png" alt="image-20230206191849974" style="zoom: 50%;" />
 
 <p><strong>注意事项：</strong></p>
 <ol>
@@ -367,17 +257,17 @@
 <li>因此转发的页面中可以通过request域获取到所有数据</li>
 </ol>
 <p>修改 VoteHandler.java：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//演示通过返回ModelAndView对象，将数据放入到request域中</span><br><span class="hljs-meta">@RequestMapping(value = &quot;/vote07&quot;)</span><br><span class="hljs-keyword">public</span> ModelAndView <span class="hljs-title function_">test07</span><span class="hljs-params">(Master master)</span> &#123;<br>    <span class="hljs-type">ModelAndView</span> <span class="hljs-variable">modelAndView</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ModelAndView</span>();<br>    <span class="hljs-comment">//放入属性到 ModelAndView对象</span><br>    modelAndView.addObject(<span class="hljs-string">&quot;address&quot;</span>, <span class="hljs-string">&quot;shanghai~~&quot;</span>);<br>    <span class="hljs-comment">//指定要跳转的视图名称</span><br>    modelAndView.setViewName(<span class="hljs-string">&quot;vote_ok&quot;</span>);<br>    <span class="hljs-keyword">return</span> modelAndView;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//演示通过返回ModelAndView对象，将数据放入到request域中</span></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;/vote07&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ModelAndView <span class="title function_">test07</span><span class="params">(Master master)</span> &#123;</span><br><span class="line">    <span class="type">ModelAndView</span> <span class="variable">modelAndView</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ModelAndView</span>();</span><br><span class="line">    <span class="comment">//放入属性到 ModelAndView对象</span></span><br><span class="line">    modelAndView.addObject(<span class="string">&quot;address&quot;</span>, <span class="string">&quot;shanghai~~&quot;</span>);</span><br><span class="line">    <span class="comment">//指定要跳转的视图名称</span></span><br><span class="line">    modelAndView.setViewName(<span class="string">&quot;vote_ok&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> modelAndView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>model_data.jsp不变</p>
 <p>vote_ok.jsp：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;vote_ok&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;取出request域中的信息&lt;/h1&gt;<br>主人的address=$&#123;requestScope.address&#125;<br>主人的id=$&#123;requestScope.master.id&#125;<br>主人的名字=$&#123;requestScope.master.name&#125;<br>宠物的id=$&#123;requestScope.master.pet.id&#125;<br>宠物的名字=$&#123;requestScope.master.pet.name&#125;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;vote_ok&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;取出request域中的信息&lt;/h1&gt;</span><br><span class="line">主人的address=$&#123;requestScope.address&#125;</span><br><span class="line">主人的id=$&#123;requestScope.master.id&#125;</span><br><span class="line">主人的名字=$&#123;requestScope.master.name&#125;</span><br><span class="line">宠物的id=$&#123;requestScope.master.pet.id&#125;</span><br><span class="line">宠物的名字=$&#123;requestScope.master.pet.name&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 
 <p>model_data.jsp：</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206200644063.png" srcset="/img/loading.gif" lazyload alt="image-20230206200644063" style="zoom:60%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206200644063.png" alt="image-20230206200644063" style="zoom:60%;" />
 
 <p>vote_ok.jsp：可以看到在ModelAndView中的数据已经被放入到了request对象中，因此可以直接获取</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206200724038.png" srcset="/img/loading.gif" lazyload alt="image-20230206200724038" style="zoom:60%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206200724038.png" alt="image-20230206200724038" style="zoom:60%;" />
 
 <p><strong>注意事项：</strong></p>
 <ol>
@@ -399,25 +289,25 @@
 <p>应用实例</p>
 </blockquote>
 <p>仍然以之前的例子说明：</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png" srcset="/img/loading.gif" lazyload alt="image-20230206181733509" style="zoom:70%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206181733509.png" alt="image-20230206181733509" style="zoom:70%;" />
 
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206202910589.png" srcset="/img/loading.gif" lazyload alt="image-20230206202910589" style="zoom:67%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206202910589.png" alt="image-20230206202910589" style="zoom:67%;" />
 
 <ol>
 <li><p>model_date.jsp</p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;model_data&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;添加信息[测试session]&lt;/h1&gt;<br>&lt;form action=<span class="hljs-string">&quot;vote/vote08&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span>&gt;<br>  主人id：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;id&quot;</span>/&gt;&lt;br/&gt;<br>  主人名：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;name&quot;</span>/&gt;&lt;br/&gt;<br>  宠物id：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;pet.id&quot;</span>/&gt;&lt;br/&gt;<br>  宠物名：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;pet.name&quot;</span>/&gt;&lt;br/&gt;<br>  &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;添加主人和宠物&quot;</span>/&gt;&lt;br/&gt;<br>&lt;/form&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;model_data&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;添加信息[测试session]&lt;/h1&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;vote/vote08&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">  主人id：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;id&quot;</span>/&gt;&lt;br/&gt;</span><br><span class="line">  主人名：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span>/&gt;&lt;br/&gt;</span><br><span class="line">  宠物id：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;pet.id&quot;</span>/&gt;&lt;br/&gt;</span><br><span class="line">  宠物名：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;pet.name&quot;</span>/&gt;&lt;br/&gt;</span><br><span class="line">  &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;添加主人和宠物&quot;</span>/&gt;&lt;br/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>修改VoteHandler.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//演示如何将数据设置到session域中</span><br><span class="hljs-meta">@RequestMapping(value = &quot;/vote08&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">test08</span><span class="hljs-params">(Master master,HttpSession session)</span> &#123;<br>    <span class="hljs-comment">//master对象默认放在request域中</span><br>    <span class="hljs-comment">//因此要手动将数据放入session中</span><br>    session.setAttribute(<span class="hljs-string">&quot;master&quot;</span>,master);<br>    session.setAttribute(<span class="hljs-string">&quot;address&quot;</span>,<span class="hljs-string">&quot;guangzhou&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//演示如何将数据设置到session域中</span></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;/vote08&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">test08</span><span class="params">(Master master,HttpSession session)</span> &#123;</span><br><span class="line">    <span class="comment">//master对象默认放在request域中</span></span><br><span class="line">    <span class="comment">//因此要手动将数据放入session中</span></span><br><span class="line">    session.setAttribute(<span class="string">&quot;master&quot;</span>,master);</span><br><span class="line">    session.setAttribute(<span class="string">&quot;address&quot;</span>,<span class="string">&quot;guangzhou&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;vote_ok&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>vote_ok.jsp：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;vote_ok&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;取出session域中的信息&lt;/h1&gt;<br>主人的address=$&#123;sessionScope.address&#125;&lt;br/&gt;<br>主人的id=$&#123;sessionScope.master.id&#125;&lt;br/&gt;<br>主人的名字=$&#123;sessionScope.master.name&#125;&lt;br/&gt;<br>宠物的id=$&#123;sessionScope.master.pet.id&#125;&lt;br/&gt;<br>宠物的名字=$&#123;sessionScope.master.pet.name&#125;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;vote_ok&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;取出session域中的信息&lt;/h1&gt;</span><br><span class="line">主人的address=$&#123;sessionScope.address&#125;&lt;br/&gt;</span><br><span class="line">主人的id=$&#123;sessionScope.master.id&#125;&lt;br/&gt;</span><br><span class="line">主人的名字=$&#123;sessionScope.master.name&#125;&lt;br/&gt;</span><br><span class="line">宠物的id=$&#123;sessionScope.master.pet.id&#125;&lt;br/&gt;</span><br><span class="line">宠物的名字=$&#123;sessionScope.master.pet.name&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>model_data.jsp：</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206203843271.png" srcset="/img/loading.gif" lazyload alt="image-20230206203843271" style="zoom:60%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206203843271.png" alt="image-20230206203843271" style="zoom:60%;" />
 
 <p>vote_ok.jsp：</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206203849600.png" srcset="/img/loading.gif" lazyload alt="image-20230206203849600" style="zoom:60%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206203849600.png" alt="image-20230206203849600" style="zoom:60%;" />
 
 
 
@@ -431,13 +321,13 @@
 </blockquote>
 <ol>
 <li><p>修改VoteHandler.java，增加方法，并测试。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(value = &quot;/vote09&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">test09</span><span class="hljs-params">()</span> &#123;<br>    System.out.println(<span class="hljs-string">&quot;test09被调用...&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>&#125;<br><br><span class="hljs-meta">@RequestMapping(value = &quot;/vote10&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">test10</span><span class="hljs-params">()</span> &#123;<br>    System.out.println(<span class="hljs-string">&quot;test10被调用...&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;vote_ok&quot;</span>;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 1.当 Handler的一个方法被 <span class="hljs-doctag">@ModelAttribute</span> 修饰时，这个方法就是前置方法</span><br><span class="hljs-comment"> * 2.该 Handler中的其他方法被调用时，都会先调用这个前置方法</span><br><span class="hljs-comment"> * 3.类似spring的aop的前置通知</span><br><span class="hljs-comment"> * 4.前置方法会切入到其他方法前执行[底层还是aop机制]</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@ModelAttribute</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">prepareModel</span><span class="hljs-params">()</span> &#123;<br>    System.out.println(<span class="hljs-string">&quot;prepareModel()---完成准备工作&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;/vote09&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">test09</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;test09被调用...&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;vote_ok&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;/vote10&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">test10</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;test10被调用...&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;vote_ok&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 1.当 Handler的一个方法被 <span class="doctag">@ModelAttribute</span> 修饰时，这个方法就是前置方法</span></span><br><span class="line"><span class="comment"> * 2.该 Handler中的其他方法被调用时，都会先调用这个前置方法</span></span><br><span class="line"><span class="comment"> * 3.类似spring的aop的前置通知</span></span><br><span class="line"><span class="comment"> * 4.前置方法会切入到其他方法前执行[底层还是aop机制]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@ModelAttribute</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">prepareModel</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;prepareModel()---完成准备工作&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>分别在浏览器中方法test09，test10方法</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206205955916.png" srcset="/img/loading.gif" lazyload alt="image-20230206205955916" style="zoom:67%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206205955916.png" alt="image-20230206205955916" style="zoom:67%;" />
 </li>
 <li><p>后台输出：可以看到每次目标方法被访问前，都会调用前置方法prepareModel()</p>
-<img src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206210025190.png" srcset="/img/loading.gif" lazyload alt="image-20230206210025190" style="zoom:67%;" /></li>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://liyuelian.oss-cn-shenzhen.aliyuncs.com/imgs/image-20230206210025190.png" alt="image-20230206210025190" style="zoom:67%;" /></li>
 </ol>
 <h3 id="3-2-ModelAttribute的最佳实践"><a href="#3-2-ModelAttribute的最佳实践" class="headerlink" title="3.2@ModelAttribute的最佳实践"></a>3.2@ModelAttribute的最佳实践</h3><ul>
 <li>修改用户信息（就是这种机制的经典应用），流程如下：<ol>
@@ -447,373 +337,89 @@
 </ol>
 </li>
 </ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://liyuelian.github.io">liyuelian</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://liyuelian.github.io/2023/02/08/23-31-39/">https://liyuelian.github.io/2023/02/08/23-31-39/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://liyuelian.github.io" target="_blank">liyuelian</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%A1%86%E6%9E%B6/">框架</a></div><div class="post_share"><div class="social-share" data-image="/img/4.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/02/08/23-33-40/" title="视图和视图解析器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/9.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">视图和视图解析器</div></div></a></div><div class="next-post pull-right"><a href="/2023/02/08/23-31-38/" title="SpringMVC映射请求数据"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SpringMVC映射请求数据</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/08/23-31-38/" title="SpringMVC映射请求数据"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-08</div><div class="title">SpringMVC映射请求数据</div></div></a></div><div><a href="/2023/02/08/23-30-36/" title="SpringMVC介绍"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-08</div><div class="title">SpringMVC介绍</div></div></a></div><div><a href="/2023/02/08/23-33-40/" title="视图和视图解析器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/9.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-08</div><div class="title">视图和视图解析器</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/weblogo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">liyuelian</div><div class="author-info__description">个人博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/liyuelian"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/liyuelian" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:liyuelian.ke@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">个人网站</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="toc-number">1.</span> <span class="toc-text">模型数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E6%94%BE%E5%85%A5request"><span class="toc-number">1.1.</span> <span class="toc-text">1.数据放入request</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E6%96%B9%E5%BC%8F1-%E9%80%9A%E8%BF%87HttpServletRequest%E6%94%BE%E5%85%A5request%E5%9F%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1方式1-通过HttpServletRequest放入request域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E6%96%B9%E5%BC%8F2-%E9%80%9A%E8%BF%87%E8%AF%B7%E6%B1%82%E7%9A%84%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0Map-lt-String-Object-gt-%E6%94%BE%E5%85%A5request%E5%9F%9F"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2方式2-通过请求的方法参数Map&lt;String,Object&gt;放入request域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3%E6%96%B9%E5%BC%8F3-%E9%80%9A%E8%BF%87%E8%BF%94%E5%9B%9EModelAndView%E5%AF%B9%E8%B1%A1%E5%AE%9E%E7%8E%B0request%E5%9F%9F%E6%95%B0%E6%8D%AE"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3方式3-通过返回ModelAndView对象实现request域数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E6%94%BE%E5%85%A5session"><span class="toc-number">1.2.</span> <span class="toc-text">2.数据放入session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-ModelAttribute%E5%AE%9E%E7%8E%B0prepare%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">3.@ModelAttribute实现prepare方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E5%9F%BA%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1基本说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-ModelAttribute%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2@ModelAttribute的最佳实践</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/08/23-33-40/" title="视图和视图解析器"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="视图和视图解析器"/></a><div class="content"><a class="title" href="/2023/02/08/23-33-40/" title="视图和视图解析器">视图和视图解析器</a><time datetime="2023-02-08T15:33:40.000Z" title="发表于 2023-02-08 23:33:40">2023-02-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/08/23-31-39/" title="模型数据"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="模型数据"/></a><div class="content"><a class="title" href="/2023/02/08/23-31-39/" title="模型数据">模型数据</a><time datetime="2023-02-08T15:31:39.000Z" title="发表于 2023-02-08 23:31:39">2023-02-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/08/23-31-38/" title="SpringMVC映射请求数据"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringMVC映射请求数据"/></a><div class="content"><a class="title" href="/2023/02/08/23-31-38/" title="SpringMVC映射请求数据">SpringMVC映射请求数据</a><time datetime="2023-02-08T15:31:38.000Z" title="发表于 2023-02-08 23:31:38">2023-02-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/08/23-31-38/" title="RequestMapping和Rest"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RequestMapping和Rest"/></a><div class="content"><a class="title" href="/2023/02/08/23-31-38/" title="RequestMapping和Rest">RequestMapping和Rest</a><time datetime="2023-02-08T15:31:38.000Z" title="发表于 2023-02-08 23:31:38">2023-02-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/08/23-30-36/" title="SpringMVC介绍"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringMVC介绍"/></a><div class="content"><a class="title" href="/2023/02/08/23-30-36/" title="SpringMVC介绍">SpringMVC介绍</a><time datetime="2023-02-08T15:30:36.000Z" title="发表于 2023-02-08 23:30:36">2023-02-08</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/4.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By liyuelian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">I wish you to become your own sun, no need to rely on who's light.<p><a target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://github.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
 
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="30" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="/music/"]):not([href="/no-pjax/"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/SpringMVC/" class="category-chain-item">SpringMVC</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E6%A1%86%E6%9E%B6/">#框架</a>
-      
-    </div>
-  
-</div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>模型数据</div>
-      <div>https://liyuelian.github.io/2023/02/08/23-31-39/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>liyuelian</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2023年2月8日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2023/02/08/23-33-40/" title="视图和视图解析器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">视图和视图解析器</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/02/08/23-31-38/" title="RequestMapping和Rest">
-                        <span class="hidden-mobile">RequestMapping和Rest</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
       }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
     }
+  }
 
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
+  typeof typed === 'object' && typed.destroy()
 
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
 
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
 
-  <script>Fluid.plugins.codeWidget();</script>
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
 
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
 
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
 
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
 
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
 
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
 
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
 
-  <script>Fluid.plugins.imageCaption();</script>
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
 
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
-</body>
-</html>
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

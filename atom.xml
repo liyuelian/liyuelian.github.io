@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>liyuelian&#39;blogs</title>
+  <title>liyuelian</title>
   
-  <subtitle>忽如远行客</subtitle>
+  <subtitle>人生天地间，忽如远行客</subtitle>
   <link href="https://liyuelian.github.io/atom.xml" rel="self"/>
   
   <link href="https://liyuelian.github.io/"/>
@@ -67,18 +67,18 @@
   </entry>
   
   <entry>
-    <title>RequestMapping和Rest</title>
+    <title>SpringMVC映射请求数据</title>
     <link href="https://liyuelian.github.io/2023/02/08/23-31-38/"/>
     <id>https://liyuelian.github.io/2023/02/08/23-31-38/</id>
     <published>2023-02-08T15:31:38.000Z</published>
-    <updated>2023-02-08T15:48:31.978Z</updated>
+    <updated>2023-02-08T15:32:25.669Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;RequestMapping和Rest&quot;&gt;&lt;a href=&quot;#RequestMapping和Rest&quot; class=&quot;headerlink&quot; title=&quot;RequestMapping和Rest&quot;&gt;&lt;/a&gt;RequestMapping和Rest&lt;/h1&gt;&lt;h2</summary>
+    <summary type="html">&lt;h1 id=&quot;SpringMVC映射请求数据&quot;&gt;&lt;a href=&quot;#SpringMVC映射请求数据&quot; class=&quot;headerlink&quot; title=&quot;SpringMVC映射请求数据&quot;&gt;&lt;/a&gt;SpringMVC映射请求数据&lt;/h1&gt;&lt;h2 id=&quot;1-获取参数值&quot;&gt;&lt;a</summary>
         
       
     
@@ -92,18 +92,18 @@
   </entry>
   
   <entry>
-    <title>SpringMVC映射请求数据</title>
+    <title>RequestMapping和Rest</title>
     <link href="https://liyuelian.github.io/2023/02/08/23-31-38/"/>
     <id>https://liyuelian.github.io/2023/02/08/23-31-38/</id>
     <published>2023-02-08T15:31:38.000Z</published>
-    <updated>2023-02-08T15:32:25.669Z</updated>
+    <updated>2023-02-08T15:48:31.978Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;SpringMVC映射请求数据&quot;&gt;&lt;a href=&quot;#SpringMVC映射请求数据&quot; class=&quot;headerlink&quot; title=&quot;SpringMVC映射请求数据&quot;&gt;&lt;/a&gt;SpringMVC映射请求数据&lt;/h1&gt;&lt;h2 id=&quot;1-获取参数值&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;RequestMapping和Rest&quot;&gt;&lt;a href=&quot;#RequestMapping和Rest&quot; class=&quot;headerlink&quot; title=&quot;RequestMapping和Rest&quot;&gt;&lt;/a&gt;RequestMapping和Rest&lt;/h1&gt;&lt;h2</summary>
         
       
     
@@ -195,7 +195,7 @@
     <link href="https://liyuelian.github.io/2023/01/12/00-15-22/"/>
     <id>https://liyuelian.github.io/2023/01/12/00-15-22/</id>
     <published>2023-01-11T16:15:22.000Z</published>
-    <updated>2023-02-08T15:28:22.009Z</updated>
+    <updated>2023-06-06T14:24:13.671Z</updated>
     
     
       
@@ -220,7 +220,7 @@
     <link href="https://liyuelian.github.io/2023/01/12/00-15-22/"/>
     <id>https://liyuelian.github.io/2023/01/12/00-15-22/</id>
     <published>2023-01-11T16:15:22.000Z</published>
-    <updated>2023-02-08T15:28:11.833Z</updated>
+    <updated>2023-06-06T14:23:35.764Z</updated>
     
     
       
@@ -228,31 +228,6 @@
         
         
     <summary type="html">&lt;h1 id=&quot;主题-1-The-Shell&quot;&gt;&lt;a href=&quot;#主题-1-The-Shell&quot; class=&quot;headerlink&quot; title=&quot;主题 1 The Shell&quot;&gt;&lt;/a&gt;主题 1 The Shell&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="the missing semester of cs" scheme="https://liyuelian.github.io/categories/the-missing-semester-of-cs/"/>
-    
-    
-    <category term="linux" scheme="https://liyuelian.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>主题 2 Shell工具和脚本</title>
-    <link href="https://liyuelian.github.io/2023/01/12/00-15-22/"/>
-    <id>https://liyuelian.github.io/2023/01/12/00-15-22/</id>
-    <published>2023-01-11T16:15:22.000Z</published>
-    <updated>2023-02-08T15:28:16.950Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;主题-2-Shell工具和脚本&quot;&gt;&lt;a href=&quot;#主题-2-Shell工具和脚本&quot; class=&quot;headerlink&quot; title=&quot;主题 2 Shell工具和脚本&quot;&gt;&lt;/a&gt;主题 2 Shell工具和脚本&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
         
       
     
